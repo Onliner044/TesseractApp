@@ -23,19 +23,21 @@
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.rotationGroupBox = new System.Windows.Forms.GroupBox();
-            this.colorGroupBox = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericX = new System.Windows.Forms.NumericUpDown();
-            this.numericY = new System.Windows.Forms.NumericUpDown();
             this.numericZ = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.numericY = new System.Windows.Forms.NumericUpDown();
+            this.numericX = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.colorGroupBox = new System.Windows.Forms.GroupBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.canvasHost = new System.Windows.Forms.Integration.ElementHost();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.test = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -49,9 +51,9 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.rotationGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,8 +70,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 255;
+            this.splitContainer1.Size = new System.Drawing.Size(800, 459);
+            this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -85,9 +87,9 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.canvasHost);
-            this.splitContainer2.Size = new System.Drawing.Size(255, 450);
-            this.splitContainer2.SplitterDistance = 111;
+            this.splitContainer2.Panel2.Controls.Add(this.test);
+            this.splitContainer2.Size = new System.Drawing.Size(350, 459);
+            this.splitContainer2.SplitterDistance = 113;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -103,8 +105,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.colorGroupBox);
-            this.splitContainer3.Size = new System.Drawing.Size(255, 111);
-            this.splitContainer3.SplitterDistance = 127;
+            this.splitContainer3.Size = new System.Drawing.Size(350, 113);
+            this.splitContainer3.SplitterDistance = 175;
             this.splitContainer3.TabIndex = 0;
             // 
             // rotationGroupBox
@@ -118,43 +120,10 @@
             this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rotationGroupBox.Location = new System.Drawing.Point(0, 0);
             this.rotationGroupBox.Name = "rotationGroupBox";
-            this.rotationGroupBox.Size = new System.Drawing.Size(127, 111);
+            this.rotationGroupBox.Size = new System.Drawing.Size(175, 113);
             this.rotationGroupBox.TabIndex = 0;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
-            // 
-            // colorGroupBox
-            // 
-            this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.colorGroupBox.Name = "colorGroupBox";
-            this.colorGroupBox.Size = new System.Drawing.Size(124, 111);
-            this.colorGroupBox.TabIndex = 0;
-            this.colorGroupBox.TabStop = false;
-            this.colorGroupBox.Text = "Color";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(12, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "x";
-            // 
-            // numericX
-            // 
-            this.numericX.Location = new System.Drawing.Point(56, 24);
-            this.numericX.Name = "numericX";
-            this.numericX.Size = new System.Drawing.Size(43, 20);
-            this.numericX.TabIndex = 1;
-            // 
-            // numericY
-            // 
-            this.numericY.Location = new System.Drawing.Point(56, 50);
-            this.numericY.Name = "numericY";
-            this.numericY.Size = new System.Drawing.Size(43, 20);
-            this.numericY.TabIndex = 1;
             // 
             // numericZ
             // 
@@ -163,14 +132,19 @@
             this.numericZ.Size = new System.Drawing.Size(43, 20);
             this.numericZ.TabIndex = 1;
             // 
-            // label2
+            // numericY
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(12, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "y";
+            this.numericY.Location = new System.Drawing.Point(56, 50);
+            this.numericY.Name = "numericY";
+            this.numericY.Size = new System.Drawing.Size(43, 20);
+            this.numericY.TabIndex = 1;
+            // 
+            // numericX
+            // 
+            this.numericX.Location = new System.Drawing.Point(56, 24);
+            this.numericX.Name = "numericX";
+            this.numericX.Size = new System.Drawing.Size(43, 20);
+            this.numericX.TabIndex = 1;
             // 
             // label3
             // 
@@ -181,30 +155,61 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "z";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(38, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(12, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "y";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(38, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(12, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "x";
+            // 
+            // colorGroupBox
+            // 
+            this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.colorGroupBox.Name = "colorGroupBox";
+            this.colorGroupBox.Size = new System.Drawing.Size(171, 113);
+            this.colorGroupBox.TabIndex = 0;
+            this.colorGroupBox.TabStop = false;
+            this.colorGroupBox.Text = "Color";
+            // 
             // pictureBox
             // 
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(541, 450);
+            this.pictureBox.Size = new System.Drawing.Size(446, 459);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
-            // canvasHost
+            // timer1
             // 
-            this.canvasHost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasHost.Location = new System.Drawing.Point(0, 0);
-            this.canvasHost.Name = "canvasHost";
-            this.canvasHost.Size = new System.Drawing.Size(255, 335);
-            this.canvasHost.TabIndex = 0;
-            this.canvasHost.Text = "elementHost1";
-            this.canvasHost.Child = null;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // test
+            // 
+            this.test.AutoSize = true;
+            this.test.Location = new System.Drawing.Point(70, 79);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(12, 13);
+            this.test.TabIndex = 0;
+            this.test.Text = "z";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 459);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "Tesseract";
@@ -214,6 +219,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -222,9 +228,9 @@
             this.splitContainer3.ResumeLayout(false);
             this.rotationGroupBox.ResumeLayout(false);
             this.rotationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -244,7 +250,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Integration.ElementHost canvasHost;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label test;
     }
 }
 
