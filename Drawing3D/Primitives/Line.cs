@@ -17,7 +17,7 @@ namespace Drawing3D.Primitives
 
         public override void Draw(Graphics3D graphics)
         {
-            graphics.DrawLine(Pen, Point1, Point2);
+            graphics.DrawLine(Point1, Point2);
         }
     }
 }

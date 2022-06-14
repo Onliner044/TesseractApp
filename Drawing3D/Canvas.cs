@@ -36,16 +36,7 @@ namespace Drawing3D
         {
             foreach (var drawable in _drawables)
             {
-                _graphics3D.PushWorld();
-                _graphics3D.ApplyWorld(drawable);
-
-                _graphics3D.PushLocal();
-                _graphics3D.ApplyLocal(drawable);
-
                 drawable.Draw(_graphics3D);
-
-                _graphics3D.PopLocal();
-                _graphics3D.PopWorld();
             }
         }
 

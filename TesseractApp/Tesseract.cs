@@ -1,25 +1,30 @@
 ﻿using Drawing3D;
-using Drawing3D.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TesseractApp.Contracts;
+using Drawing3D.Primitives;
+using System.Numerics;
 
 namespace TesseractApp
 {
-    public class Tesseract : Decorator
+    public class Tesseract : Primitive
     {
-        public Tesseract(IComponent component) 
-            : base(component)
+        Cube cube;
+        float _edgeLength;
+
+        public Tesseract(float edgeLength)
         {
+            _edgeLength = edgeLength;
             
+            cube = new Cube(_edgeLength);
         }
 
-        public void Draw(Graphics3D graphics)
+        public override void Draw(Graphics3D graphics)
         {
+            cube.Draw(graphics);
+
+            graphics.PushTransform();
+            graphics.Translate(new Vector3(_edgeLength / 2.0f));
+            graphics.Scale(new Vector3(0.5f));
+            cube.Draw(graphics);
+            graphics.PopTransform();
         }
     }
 }

@@ -13,36 +13,17 @@ namespace Drawing3D.Primitives
         public Transformation Transform { get; protected set; }
         public Pen Pen { get; protected set; }
 
-        public List<IDrawable> Children{ get; private set; }
-        public Primitive(Vector3 position) 
-            : this()
-        {
-            Transform.Translate(position, Mode.Local);
-        }
-
         public Primitive()
         {
-            Children = new List<IDrawable>();
             Transform = new Transformation();
             Pen = new Pen(Color.Black);
         }
         
-        public void SetColor(Color color)
+        public virtual void SetColor(Color color)
         {
             Pen.Color = color;
         }
 
-        public virtual void Draw(Graphics3D graphics)
-        {
-            foreach (var child in Children)
-            {
-                graphics.PushLocal();
-                graphics.ApplyLocal(child);
-
-                child.Draw(graphics);
-
-                graphics.PopLocal();
-            }
-        }
+        public abstract void Draw(Graphics3D graphics);
     }
 }

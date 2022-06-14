@@ -1,32 +1,39 @@
-﻿using Drawing3D.Contracts;
-using Drawing3D.Utils;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
 using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Drawing3D.Primitives
 {
     public class Cube : Primitive
     {
+        Quad quad;
+        float edgeLength;
+
         public Cube(float edgeLength)
         {
-            Quad quad = new Quad(edgeLength);
-            Children.Add(quad);
+            this.edgeLength = edgeLength;
+            quad = new Quad(this.edgeLength);
+        }
 
-            quad = new Quad(edgeLength);
-            quad.Transform.Translate(new Vector3(0, 0, edgeLength), Mode.Local);
-            Children.Add(quad);
+        public override void Draw(Graphics3D graphics)
+        {
+            graphics.PushTransform();
+            quad.Draw(graphics);
 
-            for (int i = 0; i < 4; i++)
-            {
-                Line line = new Line(new Vector3(0, 0, 0), new Vector3(0, 0, edgeLength));
-                line.Transform.Origin = new Vector3(edgeLength / 2, edgeLength / 2, 0);
-                line.Transform.Rotate(Vector3.UnitZ, Converter.DegToRad(90 * i), Mode.Local);
+            graphics.DrawLine(new Vector3(0, 0, 0), new Vector3(0, 0, edgeLength));
+            graphics.DrawLine(new Vector3(0, edgeLength, 0), new Vector3(0, edgeLength, edgeLength));
+            graphics.DrawLine(new Vector3(edgeLength, edgeLength, 0), new Vector3(edgeLength, edgeLength, edgeLength));
+            graphics.DrawLine(new Vector3(edgeLength, 0, 0), new Vector3(edgeLength, 0, edgeLength));
 
-                Children.Add(line);
-            }
+            graphics.PushTransform();
+            graphics.Translate(new Vector3(0, 0, edgeLength));
+            quad.Draw(graphics);
+            graphics.PopTransform();
 
-            Transform.Origin = new Vector3(edgeLength / 2);
+            graphics.PopTransform();
         }
     }
 }

@@ -9,7 +9,6 @@ namespace Drawing3D.Primitives
         public float Size { get; protected set; }
 
         public Vertex(Vector3 position, float size = 1.0f)
-            : base(position)
         {
             Size = size;
         }

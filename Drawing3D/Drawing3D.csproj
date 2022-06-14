@@ -45,8 +45,8 @@
   <ItemGroup>
     <Compile Include="Canvas.cs" />
     <Compile Include="Graphics3D.cs" />
-    <Compile Include="Primitives\Cube.cs" />
     <Compile Include="Contracts\IDrawable.cs" />
+    <Compile Include="Primitives\Cube.cs" />
     <Compile Include="Primitives\Line.cs" />
     <Compile Include="Primitives\Primitive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

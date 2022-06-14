@@ -1,4 +1,5 @@
 ﻿using Drawing3D.Contracts;
+using Drawing3D.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,119 +11,111 @@ namespace Drawing3D
     public class Graphics3D
     {
         private Graphics _graphics;
+        private Pen _pen;
+
         private float _resolution;
         private float _fieldOfView;
         private float z0;
         private SizeF _halfBoundSize;
 
-        private Stack<Matrix4x4> _transformLocal;
-        private Stack<Matrix4x4> _transformWorld;
-        public Matrix4x4 _local;
-        public Matrix4x4 _world;
+        private Stack<Matrix4x4> _transform;
+        public Matrix4x4 _model;
+        private Matrix4x4 _projection;
 
         public Graphics3D(Graphics graphics)
         {
             _graphics = graphics;
-            _local = Matrix4x4.Identity;
-            _world = Matrix4x4.Identity;
-            _transformLocal = new Stack<Matrix4x4>();
-            _transformWorld = new Stack<Matrix4x4>();
+            
+            _pen = new Pen(Color.Black);
+
+            _projection = Matrix4x4.CreatePerspectiveFieldOfView(Converter.DegToRad(70), 1.0f, 0.1f, 100.0f);
+            _model = Matrix4x4.Identity;
+            _transform = new Stack<Matrix4x4>();
 
             _resolution = 200;
-            _fieldOfView = 40;
+            _fieldOfView = 30;
             z0 = (_resolution / 2.0f) / (float)Math.Tan((_fieldOfView / 2.0f) * (float)Math.PI / 180.0f);
             
             _halfBoundSize = graphics.VisibleClipBounds.Size;
             _halfBoundSize = new SizeF(_halfBoundSize.Width / 2, _halfBoundSize.Height / 2);
         }
 
-        public void DrawLine(Pen pen, Vector3 point1, Vector3 point2)
+        public void SetColor(Color color)
+        {
+            _pen.Color = color;
+        }
+
+        public void DrawLine(Vector3 point1, Vector3 point2)
         {
             var pointF1 = ProjectVector(point1);
             var pointF2 = ProjectVector(point2);
 
-            _graphics.DrawLine(pen, pointF1, pointF2);
+            _graphics.DrawLine(_pen, pointF1, pointF2);
         }
 
-        public void PushLocal()
+        public void Clear(Color color)
         {
-            _transformLocal.Push(_local);
+            _graphics.Clear(color);
         }
 
-        public void PushWorld()
+        public void Scale(Vector3 scale)
         {
-            _transformWorld.Push(_world);
+            _model *= Matrix4x4.CreateScale(scale);
         }
 
-        public void PopLocal()
+        public void Rotation(Vector3 axis, float angle)
         {
-            _local = _transformLocal.Pop();
+            Rotation(Quaternion.CreateFromAxisAngle(axis, angle));
         }
 
-        public void PopWorld()
+        public void Rotation(Quaternion rotation)
         {
-            _world = _transformWorld.Pop();
+            rotation = Quaternion.Normalize(rotation);
+            _model = Matrix4x4.Transform(_model, rotation);
         }
 
-        public void ApplyLocal(IDrawable drawable)
+        public void Translate(Vector3 position)
         {
-            //_local *= ApplyTransform(drawable, drawable.Transform.Local);
-
-            _local *= Matrix4x4.CreateTranslation(-drawable.Transform.Origin);
-            _local *= drawable.Transform.Local;
-            _local *= Matrix4x4.CreateTranslation(drawable.Transform.Origin);
-
-            //ApplyTransform(_local, drawable);
+            _model *= Matrix4x4.CreateTranslation(position);
         }
 
-        public void ApplyLocal(Matrix4x4 matrix)
+        public void PushTransform()
         {
-            _local = matrix;
+            _transform.Push(_model);
+            _model = Matrix4x4.Identity;
         }
 
-        public void ApplyWorld(IDrawable drawable)
+        public void PopTransform()
         {
-            _world *= Matrix4x4.CreateTranslation(-drawable.Transform.Origin);
-            _world *= drawable.Transform.World;
-            //_world *= Matrix4x4.CreateTranslation(drawable.Transform.Origin);
+            _model = _transform.Pop();
         }
 
-        public void ApplyWorld(Matrix4x4 matrix)
-        {
-            _world = matrix;
-        }
-
-        Matrix4x4 ApplyTransform(IDrawable drawable, Matrix4x4 transform)
-        {
-            Matrix4x4 matrix = Matrix4x4.Identity;
-
-            Vector3 position;
-            Vector3 scale;
-            Quaternion rotation;
-
-            Matrix4x4.Decompose(transform, out scale, out rotation, out position);
-
-            matrix *= Matrix4x4.CreateTranslation(drawable.Transform.Origin);
-            matrix = Matrix4x4.Transform(matrix, rotation);
-            matrix *= Matrix4x4.CreateTranslation(position);
-
-            return matrix;
-        }
-
-        Vector3 ApplyTransformVector(Vector3 vector, Matrix4x4 matrix)
+        Vector3 ApplyTransformToVector(Vector3 vector, Matrix4x4 matrix)
         {
             return Vector3.Transform(vector, matrix);
         }
 
         PointF ProjectVector(Vector3 vector)
         {
-            vector = ApplyTransformVector(vector, _local * _world);
-
+            vector = ApplyTransformToVector(vector, /*_projection **/ GetModel());
+            
             var point = new PointF();
             point.X = vector.X * z0 / (z0 + vector.Z) + _halfBoundSize.Width;
             point.Y = -vector.Y * z0 / (z0 + vector.Z) + _halfBoundSize.Height;
-
+            
             return point;
+        }
+
+        Matrix4x4 GetModel()
+        {
+            Matrix4x4 result = Matrix4x4.Identity;
+
+            foreach (var model in _transform)
+            {
+                result *= model;
+            }
+
+            return result;
         }
     }
 }
