@@ -1,37 +1,51 @@
-﻿using System;
+﻿using Graphics.Utils;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drawing3D.Primitives
+namespace Graphics.Primitives
 {
     public class Cube : Primitive
     {
-        Quad quad;
-        float edgeLength;
+        public Quad Quad { get; }
+        public float EdgeLength { get; }
 
         public Cube(float edgeLength)
         {
-            this.edgeLength = edgeLength;
-            quad = new Quad(this.edgeLength);
+            EdgeLength = edgeLength;
+
+            Quad = new Quad(EdgeLength);
+        }
+
+        public Cube(float edgeLength, Pen pen)
+        {
+            EdgeLength = edgeLength;
+            Pen = pen;
+
+            Quad = new Quad(EdgeLength, Pen);
         }
 
         public override void Draw(Graphics3D graphics)
         {
-            graphics.PushTransform();
-            quad.Draw(graphics);
-
-            graphics.DrawLine(new Vector3(0, 0, 0), new Vector3(0, 0, edgeLength));
-            graphics.DrawLine(new Vector3(0, edgeLength, 0), new Vector3(0, edgeLength, edgeLength));
-            graphics.DrawLine(new Vector3(edgeLength, edgeLength, 0), new Vector3(edgeLength, edgeLength, edgeLength));
-            graphics.DrawLine(new Vector3(edgeLength, 0, 0), new Vector3(edgeLength, 0, edgeLength));
+            base.Draw(graphics);
 
             graphics.PushTransform();
-            graphics.Translate(new Vector3(0, 0, edgeLength));
-            quad.Draw(graphics);
+
+            Quad.Draw(graphics);
+
+            graphics.PushTransform();
+            graphics.Translate(new Vector3(0,0,EdgeLength));
+            Quad.Draw(graphics);
             graphics.PopTransform();
+
+            graphics.Rotation(Vector3.UnitX, Converter.DegToRad(90.0f));
+            Quad.Draw(graphics);
+            graphics.Translate(new Vector3(0, EdgeLength, 0));
+            Quad.Draw(graphics);
 
             graphics.PopTransform();
         }

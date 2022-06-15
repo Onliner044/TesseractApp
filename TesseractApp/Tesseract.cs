@@ -1,29 +1,33 @@
-﻿using Drawing3D;
-using Drawing3D.Primitives;
+﻿using Graphics;
+using Graphics.Primitives;
+using Graphics.Utils;
 using System.Numerics;
 
 namespace TesseractApp
 {
     public class Tesseract : Primitive
     {
-        Cube cube;
-        float _edgeLength;
+        public Cube Cube { get; }
+        public float EdgeLength { get; }
 
         public Tesseract(float edgeLength)
         {
-            _edgeLength = edgeLength;
-            
-            cube = new Cube(_edgeLength);
+            EdgeLength = edgeLength;
+
+            Cube = new Cube(EdgeLength, Pen);
         }
 
         public override void Draw(Graphics3D graphics)
         {
-            cube.Draw(graphics);
+            base.Draw(graphics);
+
+            Cube.Draw(graphics);
 
             graphics.PushTransform();
-            graphics.Translate(new Vector3(_edgeLength / 2.0f));
+            graphics.Translate(new Vector3(EdgeLength / 2.0f));
             graphics.Scale(new Vector3(0.5f));
-            cube.Draw(graphics);
+            Cube.Draw(graphics);
+
             graphics.PopTransform();
         }
     }

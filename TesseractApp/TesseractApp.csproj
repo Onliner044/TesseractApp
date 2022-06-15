@@ -89,9 +89,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Drawing3D\Drawing3D.csproj">
+    <ProjectReference Include="..\Drawing3D\Graphics.csproj">
       <Project>{3615C05E-94AE-4093-9832-A88C27981FE4}</Project>
-      <Name>Drawing3D</Name>
+      <Name>Graphics</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

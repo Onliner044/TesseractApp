@@ -1,29 +1,20 @@
-﻿using Drawing3D.Contracts;
-using Drawing3D.Primitives;
-using Drawing3D.Utils;
-using System;
+﻿using Graphics.Contracts;
+using Graphics.Primitives;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Numerics;
 
-namespace Drawing3D
+namespace Graphics
 {
     public class Canvas
     {
-        private List<Primitive> _drawables;
+        private List<IDrawable> _drawables;
         private Graphics3D _graphics3D;
-        private Graphics _graphics;
+        private System.Drawing.Graphics _graphics;
 
-        private Canvas()
-        {
-            _drawables = new List<Primitive>();
-        }
-
-        public Canvas(Graphics graphics)
-            : this()
+        public Canvas(System.Drawing.Graphics graphics)
         {
             this._graphics = graphics;
+            _drawables = new List<IDrawable>();
             _graphics3D = new Graphics3D(_graphics);
         }
 
@@ -40,6 +31,9 @@ namespace Drawing3D
             }
         }
 
-        public void Clear(Color color) => _graphics.Clear(color);
+        public void Clear(Color color)
+        {
+            _graphics.Clear(color);
+        } 
     }
 }

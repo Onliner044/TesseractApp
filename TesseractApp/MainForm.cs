@@ -1,10 +1,7 @@
-﻿using Drawing3D;
-using Drawing3D.Contracts;
-using Drawing3D.Primitives;
-using Drawing3D.Utils;
+﻿using Graphics;
+using Graphics.Utils;
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -12,38 +9,74 @@ namespace TesseractApp
 {
     public partial class MainForm : Form
     {
-        Canvas canvas;
-        Graphics3D graphics3D;
-
-        Tesseract tesseract;
+        private Graphics3D _graphics3D;
+        private Tesseract _tesseract;
 
         public MainForm()
         {
             InitializeComponent();
 
-            graphics3D = new Graphics3D(pictureBox.CreateGraphics());
+            _graphics3D = new Graphics3D(pictureBox.CreateGraphics());
 
-            tesseract = new Tesseract(100);
+            _tesseract = new Tesseract(size.Value);
+            _tesseract.Transform.Origin = new Vector3(-_tesseract.EdgeLength / 2.0f);
 
-            //canvas = new Canvas(pictureBox.CreateGraphics());
-            //canvas.Add(axis);
-            //canvas.Add(cube);
-            //canvas.Add(tesseract);
-
-            timer1.Interval = 10;
-            timer1.Start();
+            timer.Interval = 10;
+            timer.Start();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            tesseract.Transform.Rotate(new Vector3(0f, 1f, 0f), 0.01f);
+            _graphics3D.Clear(Color.White);
 
-            graphics3D.Clear(Color.White);
-            graphics3D.PushTransform();
-            graphics3D.Translate(new Vector3(-50));
-            graphics3D.Rotation(tesseract.Transform.Rotation);
-            tesseract.Draw(graphics3D);
-            graphics3D.PopTransform();
+            _graphics3D.PushTransform();
+            _tesseract.Draw(_graphics3D);
+            _graphics3D.PopTransform();
+        }
+
+        private void color_Scroll(object sender, EventArgs e)
+        {
+            _tesseract.Pen.Color = Color.FromArgb(redValue.Value, greenValue.Value, blueValue.Value);
+        }
+
+        private void rotation_Scroll(object sender, EventArgs e)
+        {
+            float x = Converter.DegToRad(rotationX.Value);
+            float y = Converter.DegToRad(rotationY.Value);
+            float z = Converter.DegToRad(rotationZ.Value);
+
+            _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, x);
+            _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
+            _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
+        }
+
+        private void resetRotationButton_Click(object sender, EventArgs e)
+        {
+            _tesseract.Transform.Rotation = Quaternion.Identity;
+
+            rotationX.Value = 0;
+            rotationY.Value = 0;
+            rotationZ.Value = 0;
+        }
+
+        private void resetColor_Click(object sender, EventArgs e)
+        {
+            _tesseract.Pen.Color = Color.Black;
+
+            redValue.Value = 0;
+            greenValue.Value = 0;
+            blueValue.Value = 0;
+        }
+
+        private void resetSize_Click(object sender, EventArgs e)
+        {
+            size.Value = size.Maximum / 2;
+            _tesseract.Transform.Scaling = Vector3.One;
+        }
+
+        private void size_Scroll(object sender, EventArgs e)
+        {
+            _tesseract.Transform.Scaling = Vector3.One * size.Value / _tesseract.EdgeLength;
         }
     }
 }

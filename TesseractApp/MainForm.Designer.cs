@@ -24,132 +24,176 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.colorGroupBox = new System.Windows.Forms.GroupBox();
+            this.resetColor = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.blueValue = new System.Windows.Forms.TrackBar();
+            this.greenValue = new System.Windows.Forms.TrackBar();
+            this.redValue = new System.Windows.Forms.TrackBar();
             this.rotationGroupBox = new System.Windows.Forms.GroupBox();
-            this.numericZ = new System.Windows.Forms.NumericUpDown();
-            this.numericY = new System.Windows.Forms.NumericUpDown();
-            this.numericX = new System.Windows.Forms.NumericUpDown();
+            this.resetRotationButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.rotationZ = new System.Windows.Forms.TrackBar();
+            this.rotationY = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.colorGroupBox = new System.Windows.Forms.GroupBox();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.test = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            this.rotationGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericX)).BeginInit();
+            this.rotationX = new System.Windows.Forms.TrackBar();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.resetSize = new System.Windows.Forms.Button();
+            this.size = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.colorGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blueValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.greenValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redValue)).BeginInit();
+            this.rotationGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationX)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.size)).BeginInit();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // timer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // splitContainer1.Panel1
+            // pictureBox
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(213, 3);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(517, 474);
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
             // 
-            // splitContainer1.Panel2
+            // colorGroupBox
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 459);
-            this.splitContainer1.SplitterDistance = 350;
-            this.splitContainer1.TabIndex = 0;
+            this.colorGroupBox.Controls.Add(this.resetColor);
+            this.colorGroupBox.Controls.Add(this.pictureBox3);
+            this.colorGroupBox.Controls.Add(this.pictureBox2);
+            this.colorGroupBox.Controls.Add(this.pictureBox1);
+            this.colorGroupBox.Controls.Add(this.blueValue);
+            this.colorGroupBox.Controls.Add(this.greenValue);
+            this.colorGroupBox.Controls.Add(this.redValue);
+            this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.colorGroupBox.Name = "colorGroupBox";
+            this.colorGroupBox.Size = new System.Drawing.Size(204, 175);
+            this.colorGroupBox.TabIndex = 0;
+            this.colorGroupBox.TabStop = false;
+            this.colorGroupBox.Text = "Color";
             // 
-            // splitContainer2
+            // resetColor
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.resetColor.Location = new System.Drawing.Point(65, 146);
+            this.resetColor.Name = "resetColor";
+            this.resetColor.Size = new System.Drawing.Size(75, 23);
+            this.resetColor.TabIndex = 2;
+            this.resetColor.Text = "Reset";
+            this.resetColor.UseVisualStyleBackColor = true;
+            this.resetColor.Click += new System.EventHandler(this.resetColor_Click);
             // 
-            // splitContainer2.Panel1
+            // pictureBox3
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.pictureBox3.BackColor = System.Drawing.Color.Blue;
+            this.pictureBox3.Location = new System.Drawing.Point(6, 114);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox3.TabIndex = 1;
+            this.pictureBox3.TabStop = false;
             // 
-            // splitContainer2.Panel2
+            // pictureBox2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.test);
-            this.splitContainer2.Size = new System.Drawing.Size(350, 459);
-            this.splitContainer2.SplitterDistance = 113;
-            this.splitContainer2.TabIndex = 0;
+            this.pictureBox2.BackColor = System.Drawing.Color.Green;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 68);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
-            // splitContainer3
+            // pictureBox1
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
+            this.pictureBox1.BackColor = System.Drawing.Color.Red;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
-            // splitContainer3.Panel1
+            // blueValue
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.rotationGroupBox);
+            this.blueValue.Location = new System.Drawing.Point(27, 108);
+            this.blueValue.Maximum = 255;
+            this.blueValue.Name = "blueValue";
+            this.blueValue.Size = new System.Drawing.Size(177, 45);
+            this.blueValue.TabIndex = 0;
+            this.blueValue.TickFrequency = 5;
+            this.blueValue.Scroll += new System.EventHandler(this.color_Scroll);
             // 
-            // splitContainer3.Panel2
+            // greenValue
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.colorGroupBox);
-            this.splitContainer3.Size = new System.Drawing.Size(350, 113);
-            this.splitContainer3.SplitterDistance = 175;
-            this.splitContainer3.TabIndex = 0;
+            this.greenValue.Location = new System.Drawing.Point(27, 63);
+            this.greenValue.Maximum = 255;
+            this.greenValue.Name = "greenValue";
+            this.greenValue.Size = new System.Drawing.Size(177, 45);
+            this.greenValue.TabIndex = 0;
+            this.greenValue.TickFrequency = 5;
+            this.greenValue.Scroll += new System.EventHandler(this.color_Scroll);
+            // 
+            // redValue
+            // 
+            this.redValue.Location = new System.Drawing.Point(27, 19);
+            this.redValue.Maximum = 255;
+            this.redValue.Name = "redValue";
+            this.redValue.Size = new System.Drawing.Size(177, 45);
+            this.redValue.TabIndex = 0;
+            this.redValue.TickFrequency = 5;
+            this.redValue.Scroll += new System.EventHandler(this.color_Scroll);
             // 
             // rotationGroupBox
             // 
-            this.rotationGroupBox.Controls.Add(this.numericZ);
-            this.rotationGroupBox.Controls.Add(this.numericY);
-            this.rotationGroupBox.Controls.Add(this.numericX);
+            this.rotationGroupBox.Controls.Add(this.resetRotationButton);
             this.rotationGroupBox.Controls.Add(this.label3);
             this.rotationGroupBox.Controls.Add(this.label2);
+            this.rotationGroupBox.Controls.Add(this.rotationZ);
+            this.rotationGroupBox.Controls.Add(this.rotationY);
             this.rotationGroupBox.Controls.Add(this.label1);
-            this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rotationGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.rotationGroupBox.Controls.Add(this.rotationX);
+            this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rotationGroupBox.Location = new System.Drawing.Point(0, 175);
             this.rotationGroupBox.Name = "rotationGroupBox";
-            this.rotationGroupBox.Size = new System.Drawing.Size(175, 113);
+            this.rotationGroupBox.Size = new System.Drawing.Size(204, 175);
             this.rotationGroupBox.TabIndex = 0;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
             // 
-            // numericZ
+            // resetRotationButton
             // 
-            this.numericZ.Location = new System.Drawing.Point(56, 76);
-            this.numericZ.Name = "numericZ";
-            this.numericZ.Size = new System.Drawing.Size(43, 20);
-            this.numericZ.TabIndex = 1;
-            // 
-            // numericY
-            // 
-            this.numericY.Location = new System.Drawing.Point(56, 50);
-            this.numericY.Name = "numericY";
-            this.numericY.Size = new System.Drawing.Size(43, 20);
-            this.numericY.TabIndex = 1;
-            // 
-            // numericX
-            // 
-            this.numericX.Location = new System.Drawing.Point(56, 24);
-            this.numericX.Name = "numericX";
-            this.numericX.Size = new System.Drawing.Size(43, 20);
-            this.numericX.TabIndex = 1;
+            this.resetRotationButton.Location = new System.Drawing.Point(65, 146);
+            this.resetRotationButton.Name = "resetRotationButton";
+            this.resetRotationButton.Size = new System.Drawing.Size(75, 23);
+            this.resetRotationButton.TabIndex = 2;
+            this.resetRotationButton.Text = "Reset";
+            this.resetRotationButton.UseVisualStyleBackColor = true;
+            this.resetRotationButton.Click += new System.EventHandler(this.resetRotationButton_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 78);
+            this.label3.Location = new System.Drawing.Point(12, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 0;
@@ -158,100 +202,168 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 52);
+            this.label2.Location = new System.Drawing.Point(12, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "y";
             // 
+            // rotationZ
+            // 
+            this.rotationZ.Location = new System.Drawing.Point(30, 108);
+            this.rotationZ.Maximum = 360;
+            this.rotationZ.Name = "rotationZ";
+            this.rotationZ.Size = new System.Drawing.Size(174, 45);
+            this.rotationZ.TabIndex = 0;
+            this.rotationZ.TickFrequency = 5;
+            this.rotationZ.Scroll += new System.EventHandler(this.rotation_Scroll);
+            // 
+            // rotationY
+            // 
+            this.rotationY.Location = new System.Drawing.Point(30, 63);
+            this.rotationY.Maximum = 360;
+            this.rotationY.Name = "rotationY";
+            this.rotationY.Size = new System.Drawing.Size(174, 45);
+            this.rotationY.TabIndex = 0;
+            this.rotationY.TickFrequency = 5;
+            this.rotationY.Scroll += new System.EventHandler(this.rotation_Scroll);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 26);
+            this.label1.Location = new System.Drawing.Point(12, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "x";
             // 
-            // colorGroupBox
+            // rotationX
             // 
-            this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.colorGroupBox.Name = "colorGroupBox";
-            this.colorGroupBox.Size = new System.Drawing.Size(171, 113);
-            this.colorGroupBox.TabIndex = 0;
-            this.colorGroupBox.TabStop = false;
-            this.colorGroupBox.Text = "Color";
+            this.rotationX.Location = new System.Drawing.Point(30, 19);
+            this.rotationX.Maximum = 360;
+            this.rotationX.Name = "rotationX";
+            this.rotationX.Size = new System.Drawing.Size(174, 45);
+            this.rotationX.TabIndex = 0;
+            this.rotationX.TickFrequency = 5;
+            this.rotationX.Scroll += new System.EventHandler(this.rotation_Scroll);
             // 
-            // pictureBox
+            // tableLayoutPanel1
             // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(446, 459);
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.64939F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.35062F));
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(733, 480);
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // timer1
+            // panel1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.rotationGroupBox);
+            this.panel1.Controls.Add(this.colorGroupBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(204, 474);
+            this.panel1.TabIndex = 2;
             // 
-            // test
+            // groupBox1
             // 
-            this.test.AutoSize = true;
-            this.test.Location = new System.Drawing.Point(70, 79);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(12, 13);
-            this.test.TabIndex = 0;
-            this.test.Text = "z";
+            this.groupBox1.Controls.Add(this.resetSize);
+            this.groupBox1.Controls.Add(this.size);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 350);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 175);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Size";
+            // 
+            // resetSize
+            // 
+            this.resetSize.Location = new System.Drawing.Point(65, 86);
+            this.resetSize.Name = "resetSize";
+            this.resetSize.Size = new System.Drawing.Size(75, 23);
+            this.resetSize.TabIndex = 2;
+            this.resetSize.Text = "Reset";
+            this.resetSize.UseVisualStyleBackColor = true;
+            this.resetSize.Click += new System.EventHandler(this.resetSize_Click);
+            // 
+            // size
+            // 
+            this.size.Location = new System.Drawing.Point(15, 35);
+            this.size.Maximum = 300;
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(174, 45);
+            this.size.TabIndex = 0;
+            this.size.TickFrequency = 5;
+            this.size.Value = 150;
+            this.size.Scroll += new System.EventHandler(this.size_Scroll);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 459);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(733, 480);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.MaximumSize = new System.Drawing.Size(749, 519);
+            this.MinimumSize = new System.Drawing.Size(749, 519);
             this.Name = "MainForm";
             this.Text = "Tesseract";
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.colorGroupBox.ResumeLayout(false);
+            this.colorGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.blueValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.greenValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redValue)).EndInit();
             this.rotationGroupBox.ResumeLayout(false);
             this.rotationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationX)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.size)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.GroupBox rotationGroupBox;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.GroupBox colorGroupBox;
-        private System.Windows.Forms.NumericUpDown numericZ;
-        private System.Windows.Forms.NumericUpDown numericY;
-        private System.Windows.Forms.NumericUpDown numericX;
+        private System.Windows.Forms.Button resetColor;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TrackBar blueValue;
+        private System.Windows.Forms.TrackBar greenValue;
+        private System.Windows.Forms.TrackBar redValue;
+        private System.Windows.Forms.GroupBox rotationGroupBox;
+        private System.Windows.Forms.Button resetRotationButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar rotationZ;
+        private System.Windows.Forms.TrackBar rotationY;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label test;
+        private System.Windows.Forms.TrackBar rotationX;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button resetSize;
+        private System.Windows.Forms.TrackBar size;
     }
 }
 

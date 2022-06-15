@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Numerics;
 
-namespace Drawing3D.Primitives
+namespace Graphics.Primitives
 {
     public class Vertex : Primitive
     {
@@ -13,17 +13,12 @@ namespace Drawing3D.Primitives
             Size = size;
         }
 
-        public Vertex(float x, float y, float z, float size = 1.0f)
-            : this(new Vector3(x, y, z), size)
-        {
-        }
-
         public override void Draw(Graphics3D graphics)
         {
-            //PointF point1 = Transformation.Position.ToPointF();
-            //RectangleF rect = new RectangleF(point1, new SizeF(Size, Size));
+            /*PointF point1 = Transformation.Position.ToPointF();
+            RectangleF rect = new RectangleF(point1, new SizeF(Size, Size));
             
-            //graphics.FillRectangle(Pen.Brush, rect);
+            graphics.FillRectangle(Pen.Brush, rect);*/
         }
     }
 }

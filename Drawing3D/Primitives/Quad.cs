@@ -1,26 +1,35 @@
-﻿using Drawing3D.Contracts;
+﻿using Graphics.Contracts;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Numerics;
 
-namespace Drawing3D.Primitives
+namespace Graphics.Primitives
 {
     public class Quad : Primitive
     {
-        float _edgeLength;
+        public float EdgeLength { get; }
 
         public Quad(float edgeLength)
         {
-            _edgeLength = edgeLength;
+            EdgeLength = edgeLength;
+        }
+
+        public Quad(float edgeLength, Pen pen)
+            : this(edgeLength)
+        {
+            Pen = pen;
         }
 
         public override void Draw(Graphics3D graphics)
         {
+            base.Draw(graphics);
+
             graphics.PushTransform();
 
-            graphics.DrawLine(new Vector3(0, 0, 0), new Vector3(0, _edgeLength, 0));
-            graphics.DrawLine(new Vector3(0, _edgeLength, 0), new Vector3(_edgeLength, _edgeLength, 0));
-            graphics.DrawLine(new Vector3(_edgeLength, _edgeLength, 0), new Vector3(_edgeLength, 0, 0));
-            graphics.DrawLine(new Vector3(_edgeLength, 0, 0), new Vector3(0, 0, 0));
+            graphics.DrawLine(new Vector3(0, 0, 0), new Vector3(0, EdgeLength, 0));
+            graphics.DrawLine(new Vector3(0, EdgeLength, 0), new Vector3(EdgeLength, EdgeLength, 0));
+            graphics.DrawLine(new Vector3(EdgeLength, EdgeLength, 0), new Vector3(EdgeLength, 0, 0));
+            graphics.DrawLine(new Vector3(EdgeLength, 0, 0), new Vector3(0, 0, 0));
 
             graphics.PopTransform();
         }

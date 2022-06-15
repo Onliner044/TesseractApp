@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Numerics;
 
-namespace Drawing3D.Contracts
+namespace Graphics.Contracts
 {
     public interface IDrawable
     {

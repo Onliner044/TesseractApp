@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Numerics;
 using System.Text;
 
-namespace Drawing3D.Utils
+namespace Graphics.Utils
 {
     public static class Converter
     {
