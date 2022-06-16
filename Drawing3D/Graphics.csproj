@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvas.cs" />
     <Compile Include="Graphics3D.cs" />
     <Compile Include="Contracts\IDrawable.cs" />
     <Compile Include="Primitives\Cube.cs" />
@@ -52,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Primitives\Quad.cs" />
     <Compile Include="Transformation.cs" />
-    <Compile Include="Primitives\Vertex.cs" />
     <Compile Include="Utils\Converter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

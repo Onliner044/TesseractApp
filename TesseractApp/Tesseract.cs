@@ -1,33 +1,53 @@
 ﻿using Graphics;
 using Graphics.Primitives;
 using Graphics.Utils;
+using System;
 using System.Numerics;
 
 namespace TesseractApp
 {
     public class Tesseract : Primitive
     {
-        public Cube Cube { get; }
         public float EdgeLength { get; }
+
+        private Cube _cube;
+        private float _halfEdgeLength;
 
         public Tesseract(float edgeLength)
         {
             EdgeLength = edgeLength;
+            _halfEdgeLength = EdgeLength / 2.0f;
 
-            Cube = new Cube(EdgeLength, Pen);
+            _cube = new Cube(EdgeLength, Pen);
         }
 
         public override void Draw(Graphics3D graphics)
         {
             base.Draw(graphics);
 
-            Cube.Draw(graphics);
+            for (int i = 0; i < 4; i++)
+            {
+                graphics.PushTransform();
+                graphics.Rotation(Vector3.UnitY, Converter.DegToRad(90.0f * i));
+                
+                graphics.Translate(Vector3.One * _halfEdgeLength);
+                graphics.DrawLine(Vector3.One * _halfEdgeLength / 2.0f, Vector3.One * _halfEdgeLength);
+                
+                graphics.Translate(-Vector3.One * _halfEdgeLength);
+                graphics.Rotation(Vector3.UnitX, Converter.DegToRad(180.0f));
+                
+                graphics.Translate(Vector3.One * _halfEdgeLength);
+                graphics.DrawLine(Vector3.One * _halfEdgeLength / 2.0f, Vector3.One * _halfEdgeLength);
+                
+                graphics.PopTransform();
+            }
+
+            _cube.Draw(graphics);
 
             graphics.PushTransform();
-            graphics.Translate(new Vector3(EdgeLength / 2.0f));
-            graphics.Scale(new Vector3(0.5f));
-            Cube.Draw(graphics);
-
+            graphics.Translate(Vector3.One * _halfEdgeLength);
+            graphics.Scale(Vector3.One * 0.5f);
+            _cube.Draw(graphics);
             graphics.PopTransform();
         }
     }

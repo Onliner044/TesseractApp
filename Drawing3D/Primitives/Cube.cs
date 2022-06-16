@@ -11,42 +11,48 @@ namespace Graphics.Primitives
 {
     public class Cube : Primitive
     {
-        public Quad Quad { get; }
         public float EdgeLength { get; }
+
+        private Quad _quad;
+        private float _halfEdgeLength;
 
         public Cube(float edgeLength)
         {
             EdgeLength = edgeLength;
+            _halfEdgeLength = EdgeLength / 2.0f;
 
-            Quad = new Quad(EdgeLength);
+            _quad = new Quad(EdgeLength);
         }
 
         public Cube(float edgeLength, Pen pen)
         {
             EdgeLength = edgeLength;
+            _halfEdgeLength = EdgeLength / 2.0f;
+
             Pen = pen;
 
-            Quad = new Quad(EdgeLength, Pen);
+            _quad = new Quad(EdgeLength, Pen);
         }
 
         public override void Draw(Graphics3D graphics)
         {
             base.Draw(graphics);
 
-            graphics.PushTransform();
-
-            Quad.Draw(graphics);
+            _quad.Draw(graphics);
 
             graphics.PushTransform();
-            graphics.Translate(new Vector3(0,0,EdgeLength));
-            Quad.Draw(graphics);
+            graphics.Translate(Vector3.UnitZ * EdgeLength);
+            _quad.Draw(graphics);
             graphics.PopTransform();
 
-            graphics.Rotation(Vector3.UnitX, Converter.DegToRad(90.0f));
-            Quad.Draw(graphics);
-            graphics.Translate(new Vector3(0, EdgeLength, 0));
-            Quad.Draw(graphics);
-
+            graphics.PushTransform();
+            for (int i = 0; i < 4; i++)
+            {
+                graphics.Translate(new Vector3(-Vector2.One * _halfEdgeLength, 0));
+                graphics.Rotation(Vector3.UnitZ, Converter.DegToRad(90.0f * i));
+                graphics.Translate(new Vector3(Vector2.One * _halfEdgeLength, 0));
+                graphics.DrawLine(Vector3.Zero, Vector3.UnitZ * EdgeLength);
+            }
             graphics.PopTransform();
         }
     }
