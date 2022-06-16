@@ -1,11 +1,6 @@
 ﻿using Graphics.Utils;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Graphics.Primitives
 {
@@ -16,20 +11,11 @@ namespace Graphics.Primitives
         private Quad _quad;
         private float _halfEdgeLength;
 
-        public Cube(float edgeLength)
-        {
-            EdgeLength = edgeLength;
-            _halfEdgeLength = EdgeLength / 2.0f;
-
-            _quad = new Quad(EdgeLength);
-        }
-
         public Cube(float edgeLength, Pen pen)
         {
+            Pen = pen;
             EdgeLength = edgeLength;
             _halfEdgeLength = EdgeLength / 2.0f;
-
-            Pen = pen;
 
             _quad = new Quad(EdgeLength, Pen);
         }

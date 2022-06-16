@@ -12,12 +12,6 @@ namespace Graphics.Primitives
 
         private Line _line;
 
-        public Quad(float edgeLength)
-        {
-            EdgeLength = edgeLength;
-            _line = new Line(Vector3.Zero, Vector3.UnitX * EdgeLength);
-        }
-
         public Quad(float edgeLength, Pen pen)
         {
             Pen = pen;
