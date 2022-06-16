@@ -1,7 +1,6 @@
 ﻿using Graphics;
 using Graphics.Primitives;
 using Graphics.Utils;
-using System;
 using System.Numerics;
 
 namespace TesseractApp
@@ -29,16 +28,16 @@ namespace TesseractApp
             {
                 graphics.PushTransform();
                 graphics.Rotation(Vector3.UnitY, Converter.DegToRad(90.0f * i));
-                
+
                 graphics.Translate(Vector3.One * _halfEdgeLength);
                 graphics.DrawLine(Vector3.One * _halfEdgeLength / 2.0f, Vector3.One * _halfEdgeLength);
-                
+
                 graphics.Translate(-Vector3.One * _halfEdgeLength);
                 graphics.Rotation(Vector3.UnitX, Converter.DegToRad(180.0f));
-                
+
                 graphics.Translate(Vector3.One * _halfEdgeLength);
                 graphics.DrawLine(Vector3.One * _halfEdgeLength / 2.0f, Vector3.One * _halfEdgeLength);
-                
+
                 graphics.PopTransform();
             }
 

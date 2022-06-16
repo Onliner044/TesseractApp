@@ -1,5 +1,4 @@
-﻿using Drawing3D;
-using Graphics;
+﻿using Graphics;
 using Graphics.Utils;
 using System;
 using System.Drawing;
@@ -26,7 +25,7 @@ namespace TesseractApp
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            
+
             _graphics3D.Clear(Color.White);
 
             _graphics3D.PushTransform();

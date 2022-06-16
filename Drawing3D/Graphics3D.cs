@@ -1,7 +1,5 @@
 ﻿using Drawing3D;
 using Graphics.Contracts;
-using Graphics.Utils;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
@@ -22,7 +20,7 @@ namespace Graphics
         {
             _graphics = control.CreateGraphics();
             _projection = new Projection(_graphics);
-            
+
             _pen = new Pen(Color.Black);
 
             _model = Matrix4x4.Identity;
@@ -51,7 +49,7 @@ namespace Graphics
             _model = GetTransform();
 
             var pointF1 = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
-            
+
             _graphics.FillEllipse(_pen.Brush, pointF1.X, pointF1.Y, size, size);
         }
 
