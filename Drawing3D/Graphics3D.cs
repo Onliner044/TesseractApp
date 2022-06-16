@@ -1,4 +1,5 @@
-﻿using Graphics.Contracts;
+﻿using Drawing3D;
+using Graphics.Contracts;
 using Graphics.Utils;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,8 @@ namespace Graphics
     public class Graphics3D
     {
         private System.Drawing.Graphics _graphics;
-
+        private Projection _projection;
         private Pen _pen;
-
-        private float _z0;
-        private float _resolution;
-        private float _fieldOfView;
-        private SizeF _halfBoundSize;
 
         private Matrix4x4 _model;
         private Stack<Matrix4x4> _transformations;
@@ -25,18 +21,12 @@ namespace Graphics
         public Graphics3D(Control control)
         {
             _graphics = control.CreateGraphics();
+            _projection = new Projection(_graphics);
             
             _pen = new Pen(Color.Black);
 
             _model = Matrix4x4.Identity;
             _transformations = new Stack<Matrix4x4>();
-
-            _resolution = _graphics.VisibleClipBounds.Height;
-            _fieldOfView = Converter.DegToRad(70.0f);
-            _z0 = (_resolution / 2.0f) / (float)Math.Tan((_fieldOfView / 2.0f) * (float)Math.PI / 180.0f);
-
-            _halfBoundSize = _graphics.VisibleClipBounds.Size;
-            _halfBoundSize = new SizeF(_halfBoundSize.Width / 2, _halfBoundSize.Height / 2);
         }
 
         public void SetColor(Color color)
@@ -117,15 +107,10 @@ namespace Graphics
             return Vector3.Transform(vector, matrix);
         }
 
-        private PointF ProjectVector(Vector3 vector)
+        private PointF ProjectVector(Vector3 point)
         {
-            vector = ApplyTransformToVector(vector, _model);
-
-            var point = new PointF();
-            point.X = vector.X * _z0 / (_z0 + vector.Z) + _halfBoundSize.Width;
-            point.Y = -vector.Y * _z0 / (_z0 + vector.Z) + _halfBoundSize.Height;
-
-            return point;
+            point = ApplyTransformToVector(point, _model);
+            return _projection.ProjectVector(point);
         }
 
         private Matrix4x4 GetTransform()
