@@ -4,25 +4,28 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
+using System.Windows.Forms;
 
 namespace Graphics
 {
     public class Graphics3D
     {
         private System.Drawing.Graphics _graphics;
+
         private Pen _pen;
 
+        private float _z0;
         private float _resolution;
         private float _fieldOfView;
-        private float _z0;
         private SizeF _halfBoundSize;
 
-        private Stack<Matrix4x4> _transformations;
         private Matrix4x4 _model;
+        private Stack<Matrix4x4> _transformations;
 
-        public Graphics3D(System.Drawing.Graphics graphics)
+        public Graphics3D(Control control)
         {
-            _graphics = graphics;
+            _graphics = control.CreateGraphics();
+            
             _pen = new Pen(Color.Black);
 
             _model = Matrix4x4.Identity;
@@ -32,7 +35,7 @@ namespace Graphics
             _fieldOfView = Converter.DegToRad(70.0f);
             _z0 = (_resolution / 2.0f) / (float)Math.Tan((_fieldOfView / 2.0f) * (float)Math.PI / 180.0f);
 
-            _halfBoundSize = graphics.VisibleClipBounds.Size;
+            _halfBoundSize = _graphics.VisibleClipBounds.Size;
             _halfBoundSize = new SizeF(_halfBoundSize.Width / 2, _halfBoundSize.Height / 2);
         }
 

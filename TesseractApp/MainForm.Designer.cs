@@ -23,10 +23,6 @@
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.colorGroupBox = new System.Windows.Forms.GroupBox();
             this.resetColor = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -48,7 +44,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.resetSize = new System.Windows.Forms.Button();
             this.size = new System.Windows.Forms.TrackBar();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.canvas = new System.Windows.Forms.Panel();
             this.colorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -66,19 +62,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.size)).BeginInit();
             this.SuspendLayout();
             // 
-            // timer1
-            // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(213, 3);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(517, 474);
-            this.pictureBox.TabIndex = 0;
-            this.pictureBox.TabStop = false;
-            // 
             // colorGroupBox
             // 
             this.colorGroupBox.Controls.Add(this.resetColor);
@@ -91,7 +74,7 @@
             this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
             this.colorGroupBox.Name = "colorGroupBox";
-            this.colorGroupBox.Size = new System.Drawing.Size(204, 175);
+            this.colorGroupBox.Size = new System.Drawing.Size(206, 175);
             this.colorGroupBox.TabIndex = 0;
             this.colorGroupBox.TabStop = false;
             this.colorGroupBox.Text = "Color";
@@ -175,7 +158,7 @@
             this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.rotationGroupBox.Location = new System.Drawing.Point(0, 175);
             this.rotationGroupBox.Name = "rotationGroupBox";
-            this.rotationGroupBox.Size = new System.Drawing.Size(204, 175);
+            this.rotationGroupBox.Size = new System.Drawing.Size(206, 175);
             this.rotationGroupBox.TabIndex = 0;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
@@ -250,10 +233,10 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.64939F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.35062F));
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.92224F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.07777F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.canvas, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -270,7 +253,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(204, 474);
+            this.panel1.Size = new System.Drawing.Size(206, 474);
             this.panel1.TabIndex = 2;
             // 
             // groupBox1
@@ -280,7 +263,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 350);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 175);
+            this.groupBox1.Size = new System.Drawing.Size(206, 175);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Size";
@@ -306,6 +289,14 @@
             this.size.Value = 150;
             this.size.Scroll += new System.EventHandler(this.size_Scroll);
             // 
+            // canvas
+            // 
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(215, 3);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(515, 474);
+            this.canvas.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,7 +307,6 @@
             this.MinimumSize = new System.Drawing.Size(749, 519);
             this.Name = "MainForm";
             this.Text = "Tesseract";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.colorGroupBox.ResumeLayout(false);
             this.colorGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -340,9 +330,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.GroupBox colorGroupBox;
         private System.Windows.Forms.Button resetColor;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -364,6 +351,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button resetSize;
         private System.Windows.Forms.TrackBar size;
+        private System.Windows.Forms.Panel canvas;
     }
 }
 
