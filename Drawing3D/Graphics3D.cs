@@ -34,20 +34,14 @@ namespace Graphics
 
         public void DrawLine(Vector3 point1, Vector3 point2)
         {
-            PushTransform();
-            _model = GetTransform();
-
             var pointF1 = ProjectVector(point1);
             var pointF2 = ProjectVector(point2);
 
             _graphics.DrawLine(_pen, pointF1, pointF2);
-            PopTransform();
         }
 
         public void DrawCircle(Vector3 point, float size)
         {
-            _model = GetTransform();
-
             var pointF1 = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
 
             _graphics.FillEllipse(_pen.Brush, pointF1.X, pointF1.Y, size, size);
@@ -107,13 +101,13 @@ namespace Graphics
 
         private PointF ProjectVector(Vector3 point)
         {
-            point = ApplyTransformToVector(point, _model);
+            point = ApplyTransformToVector(point, GetTransform());
             return _projection.ProjectVector(point);
         }
 
         private Matrix4x4 GetTransform()
         {
-            Matrix4x4 result = Matrix4x4.Identity;
+            Matrix4x4 result = _model;
 
             foreach (var transform in _transformations)
             {
