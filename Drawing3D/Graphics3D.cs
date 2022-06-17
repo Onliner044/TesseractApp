@@ -13,17 +13,19 @@ namespace Graphics
         private Projection _projection;
         private Pen _pen;
 
-        private Matrix4x4 _model;
+        private Matrix4x4 _localTransform;
+        private Matrix4x4 _globalTransform;
         private Stack<Matrix4x4> _transformations;
 
         public Graphics3D(Control control)
         {
             _graphics = control.CreateGraphics();
-            _projection = new Projection(_graphics);
+            _projection = new Projection(_graphics.VisibleClipBounds.Size);
 
             _pen = new Pen(Color.Black);
 
-            _model = Matrix4x4.Identity;
+            _localTransform = Matrix4x4.Identity;
+            _globalTransform = Matrix4x4.Identity;
             _transformations = new Stack<Matrix4x4>();
         }
 
@@ -42,9 +44,9 @@ namespace Graphics
 
         public void DrawCircle(Vector3 point, float size)
         {
-            var pointF1 = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
-
-            _graphics.FillEllipse(_pen.Brush, pointF1.X, pointF1.Y, size, size);
+            var pointF = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
+            
+            _graphics.FillEllipse(_pen.Brush, pointF.X, pointF.Y, size, size);
         }
 
         public void Clear(Color color)
@@ -54,7 +56,7 @@ namespace Graphics
 
         public void Scale(Vector3 scale)
         {
-            _model *= Matrix4x4.CreateScale(scale);
+            _localTransform *= Matrix4x4.CreateScale(scale);
         }
 
         public void Rotation(Vector3 axis, float angle)
@@ -65,23 +67,27 @@ namespace Graphics
         public void Rotation(Quaternion rotation)
         {
             rotation = Quaternion.Normalize(rotation);
-            _model = Matrix4x4.Transform(_model, rotation);
+            _localTransform = Matrix4x4.Transform(_localTransform, rotation);
         }
 
         public void Translate(Vector3 position)
         {
-            _model *= Matrix4x4.CreateTranslation(position);
+            _localTransform *= Matrix4x4.CreateTranslation(position);
         }
 
         public void PushTransform()
         {
-            _transformations.Push(_model);
-            _model = Matrix4x4.Identity;
+            _transformations.Push(_localTransform);
+            _transformations.Push(_globalTransform);
+
+            _globalTransform = _localTransform * _globalTransform;
+            _localTransform = Matrix4x4.Identity;
         }
 
         public void PopTransform()
         {
-            _model = _transformations.Pop();
+            _globalTransform = _transformations.Pop();
+            _localTransform = _transformations.Pop();
         }
 
         internal void ApplyTransform(IDrawable drawable)
@@ -94,27 +100,10 @@ namespace Graphics
             Translate(transform.Position);
         }
 
-        private Vector3 ApplyTransformToVector(Vector3 vector, Matrix4x4 matrix)
-        {
-            return Vector3.Transform(vector, matrix);
-        }
-
         private PointF ProjectVector(Vector3 point)
         {
-            point = ApplyTransformToVector(point, GetTransform());
+            point = Vector3.Transform(point, _localTransform * _globalTransform);
             return _projection.ProjectVector(point);
-        }
-
-        private Matrix4x4 GetTransform()
-        {
-            Matrix4x4 result = _model;
-
-            foreach (var transform in _transformations)
-            {
-                result *= transform;
-            }
-
-            return result;
         }
     }
 }
