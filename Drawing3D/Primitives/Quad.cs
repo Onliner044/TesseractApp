@@ -20,16 +20,15 @@ namespace Graphics.Primitives
         {
             base.Draw(graphics);
 
-            graphics.PushTransform();
             _line.Draw(graphics);
+            
+            graphics.PushTransform();
             graphics.Translate(Vector3.UnitY * EdgeLength);
             _line.Draw(graphics);
             graphics.PopTransform();
 
-            graphics.PushTransform();
             graphics.DrawLine(Vector3.Zero, Vector3.UnitY * EdgeLength);
             graphics.DrawLine(Vector3.UnitX * EdgeLength, Vector3.UnitX * EdgeLength + Vector3.UnitY * EdgeLength);
-            graphics.PopTransform();
         }
     }
 }

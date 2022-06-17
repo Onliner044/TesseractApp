@@ -26,11 +26,9 @@ namespace Graphics.Primitives
         {
             base.Draw(graphics);
 
-            graphics.PushTransform();
             graphics.DrawLine(Point1, Point2);
             graphics.DrawCircle(Point1, VertexSize);
             graphics.DrawCircle(Point2, VertexSize);
-            graphics.PopTransform();
         }
     }
 }
