@@ -24,6 +24,7 @@ namespace TesseractApp
         {
             base.Draw(graphics);
 
+            graphics.SetColor(Pen.Color);
             _cube.Draw(graphics);
 
             graphics.PushTransform();
@@ -31,7 +32,7 @@ namespace TesseractApp
             graphics.Scale(Vector3.One * 0.5f);
             _cube.Draw(graphics);
             graphics.PopTransform();
-            
+
             for (int i = 0; i < 4; i++)
             {
                 graphics.PushTransform();

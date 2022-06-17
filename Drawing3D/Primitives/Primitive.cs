@@ -16,8 +16,10 @@ namespace Graphics.Primitives
 
         public virtual void Draw(Graphics3D graphics)
         {
-            graphics.ApplyTransform(this);
-            graphics.SetColor(Pen.Color);
+            graphics.Translate(Transform.Origin);
+            graphics.Scale(Transform.Scaling);
+            graphics.Rotation(Transform.Rotation);
+            graphics.Translate(Transform.Position);
         }
     }
 }

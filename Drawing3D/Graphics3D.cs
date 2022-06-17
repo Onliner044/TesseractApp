@@ -9,9 +9,9 @@ namespace Graphics
 {
     public class Graphics3D
     {
-        private System.Drawing.Graphics _graphics;
-        private Projection _projection;
         private Pen _pen;
+        private Projection _projection;
+        private System.Drawing.Graphics _graphics;
 
         private Matrix4x4 _localTransform;
         private Matrix4x4 _globalTransform;
@@ -19,10 +19,9 @@ namespace Graphics
 
         public Graphics3D(Control control)
         {
+            _pen = new Pen(Color.Black);
             _graphics = control.CreateGraphics();
             _projection = new Projection(_graphics.VisibleClipBounds.Size);
-
-            _pen = new Pen(Color.Black);
 
             _localTransform = Matrix4x4.Identity;
             _globalTransform = Matrix4x4.Identity;
@@ -88,16 +87,6 @@ namespace Graphics
         {
             _globalTransform = _transformations.Pop();
             _localTransform = _transformations.Pop();
-        }
-
-        internal void ApplyTransform(IDrawable drawable)
-        {
-            var transform = drawable.Transform;
-
-            Translate(transform.Origin);
-            Scale(transform.Scaling);
-            Rotation(transform.Rotation);
-            Translate(transform.Position);
         }
 
         private PointF ProjectVector(Vector3 point)
