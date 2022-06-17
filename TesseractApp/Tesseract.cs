@@ -24,6 +24,14 @@ namespace TesseractApp
         {
             base.Draw(graphics);
 
+            _cube.Draw(graphics);
+
+            graphics.PushTransform();
+            graphics.Translate(Vector3.One * _halfEdgeLength);
+            graphics.Scale(Vector3.One * 0.5f);
+            _cube.Draw(graphics);
+            graphics.PopTransform();
+            
             for (int i = 0; i < 4; i++)
             {
                 graphics.PushTransform();
@@ -40,14 +48,6 @@ namespace TesseractApp
 
                 graphics.PopTransform();
             }
-
-            _cube.Draw(graphics);
-
-            graphics.PushTransform();
-            graphics.Translate(Vector3.One * _halfEdgeLength);
-            graphics.Scale(Vector3.One * 0.5f);
-            _cube.Draw(graphics);
-            graphics.PopTransform();
         }
     }
 }
