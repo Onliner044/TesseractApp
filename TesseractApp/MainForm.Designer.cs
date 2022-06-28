@@ -39,12 +39,11 @@
             this.rotationY = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.rotationX = new System.Windows.Forms.TrackBar();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.resetSize = new System.Windows.Forms.Button();
             this.size = new System.Windows.Forms.TrackBar();
             this.canvas = new System.Windows.Forms.Panel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.colorGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -56,10 +55,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationX)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.size)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorGroupBox
@@ -72,16 +73,19 @@
             this.colorGroupBox.Controls.Add(this.greenValue);
             this.colorGroupBox.Controls.Add(this.redValue);
             this.colorGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.colorGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.colorGroupBox.Location = new System.Drawing.Point(0, 175);
             this.colorGroupBox.Name = "colorGroupBox";
-            this.colorGroupBox.Size = new System.Drawing.Size(206, 175);
+            this.colorGroupBox.Size = new System.Drawing.Size(279, 175);
             this.colorGroupBox.TabIndex = 0;
             this.colorGroupBox.TabStop = false;
             this.colorGroupBox.Text = "Color";
             // 
             // resetColor
             // 
-            this.resetColor.Location = new System.Drawing.Point(65, 146);
+            this.resetColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.resetColor.Location = new System.Drawing.Point(95, 146);
+            this.resetColor.MaximumSize = new System.Drawing.Size(200, 23);
+            this.resetColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetColor.Name = "resetColor";
             this.resetColor.Size = new System.Drawing.Size(75, 23);
             this.resetColor.TabIndex = 2;
@@ -118,30 +122,36 @@
             // 
             // blueValue
             // 
+            this.blueValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.blueValue.Location = new System.Drawing.Point(27, 108);
             this.blueValue.Maximum = 255;
             this.blueValue.Name = "blueValue";
-            this.blueValue.Size = new System.Drawing.Size(177, 45);
+            this.blueValue.Size = new System.Drawing.Size(239, 45);
             this.blueValue.TabIndex = 0;
             this.blueValue.TickFrequency = 5;
             this.blueValue.Scroll += new System.EventHandler(this.color_Scroll);
             // 
             // greenValue
             // 
+            this.greenValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.greenValue.Location = new System.Drawing.Point(27, 63);
             this.greenValue.Maximum = 255;
             this.greenValue.Name = "greenValue";
-            this.greenValue.Size = new System.Drawing.Size(177, 45);
+            this.greenValue.Size = new System.Drawing.Size(239, 45);
             this.greenValue.TabIndex = 0;
             this.greenValue.TickFrequency = 5;
             this.greenValue.Scroll += new System.EventHandler(this.color_Scroll);
             // 
             // redValue
             // 
+            this.redValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.redValue.Location = new System.Drawing.Point(27, 19);
             this.redValue.Maximum = 255;
             this.redValue.Name = "redValue";
-            this.redValue.Size = new System.Drawing.Size(177, 45);
+            this.redValue.Size = new System.Drawing.Size(239, 45);
             this.redValue.TabIndex = 0;
             this.redValue.TickFrequency = 5;
             this.redValue.Scroll += new System.EventHandler(this.color_Scroll);
@@ -156,16 +166,17 @@
             this.rotationGroupBox.Controls.Add(this.label1);
             this.rotationGroupBox.Controls.Add(this.rotationX);
             this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.rotationGroupBox.Location = new System.Drawing.Point(0, 175);
+            this.rotationGroupBox.Location = new System.Drawing.Point(0, 0);
             this.rotationGroupBox.Name = "rotationGroupBox";
-            this.rotationGroupBox.Size = new System.Drawing.Size(206, 175);
+            this.rotationGroupBox.Size = new System.Drawing.Size(279, 175);
             this.rotationGroupBox.TabIndex = 0;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
             // 
             // resetRotationButton
             // 
-            this.resetRotationButton.Location = new System.Drawing.Point(65, 146);
+            this.resetRotationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.resetRotationButton.Location = new System.Drawing.Point(95, 146);
             this.resetRotationButton.Name = "resetRotationButton";
             this.resetRotationButton.Size = new System.Drawing.Size(75, 23);
             this.resetRotationButton.TabIndex = 2;
@@ -193,20 +204,24 @@
             // 
             // rotationZ
             // 
+            this.rotationZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationZ.Location = new System.Drawing.Point(30, 108);
             this.rotationZ.Maximum = 360;
             this.rotationZ.Name = "rotationZ";
-            this.rotationZ.Size = new System.Drawing.Size(174, 45);
+            this.rotationZ.Size = new System.Drawing.Size(236, 45);
             this.rotationZ.TabIndex = 0;
             this.rotationZ.TickFrequency = 5;
             this.rotationZ.Scroll += new System.EventHandler(this.rotation_Scroll);
             // 
             // rotationY
             // 
+            this.rotationY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationY.Location = new System.Drawing.Point(30, 63);
             this.rotationY.Maximum = 360;
             this.rotationY.Name = "rotationY";
-            this.rotationY.Size = new System.Drawing.Size(174, 45);
+            this.rotationY.Size = new System.Drawing.Size(236, 45);
             this.rotationY.TabIndex = 0;
             this.rotationY.TickFrequency = 5;
             this.rotationY.Scroll += new System.EventHandler(this.rotation_Scroll);
@@ -222,39 +237,15 @@
             // 
             // rotationX
             // 
+            this.rotationX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationX.Location = new System.Drawing.Point(30, 19);
             this.rotationX.Maximum = 360;
             this.rotationX.Name = "rotationX";
-            this.rotationX.Size = new System.Drawing.Size(174, 45);
+            this.rotationX.Size = new System.Drawing.Size(236, 45);
             this.rotationX.TabIndex = 0;
             this.rotationX.TickFrequency = 5;
             this.rotationX.Scroll += new System.EventHandler(this.rotation_Scroll);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.92224F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.07777F));
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.canvas, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(733, 480);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.rotationGroupBox);
-            this.panel1.Controls.Add(this.colorGroupBox);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(206, 474);
-            this.panel1.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -263,14 +254,17 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 350);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 175);
+            this.groupBox1.Size = new System.Drawing.Size(279, 85);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Size";
             // 
             // resetSize
             // 
-            this.resetSize.Location = new System.Drawing.Point(65, 86);
+            this.resetSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.resetSize.Location = new System.Drawing.Point(95, 56);
+            this.resetSize.MaximumSize = new System.Drawing.Size(200, 23);
+            this.resetSize.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetSize.Name = "resetSize";
             this.resetSize.Size = new System.Drawing.Size(75, 23);
             this.resetSize.TabIndex = 2;
@@ -280,33 +274,59 @@
             // 
             // size
             // 
-            this.size.Location = new System.Drawing.Point(15, 35);
-            this.size.Maximum = 300;
+            this.size.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.size.Location = new System.Drawing.Point(17, 19);
+            this.size.Maximum = 100;
+            this.size.Minimum = -100;
             this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(174, 45);
+            this.size.Size = new System.Drawing.Size(234, 45);
             this.size.TabIndex = 0;
             this.size.TickFrequency = 5;
-            this.size.Value = 150;
             this.size.Scroll += new System.EventHandler(this.size_Scroll);
             // 
             // canvas
             // 
+            this.canvas.AutoScroll = true;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(215, 3);
+            this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(515, 474);
+            this.canvas.Size = new System.Drawing.Size(797, 600);
             this.canvas.TabIndex = 3;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.colorGroupBox);
+            this.splitContainer1.Panel1.Controls.Add(this.rotationGroupBox);
+            this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer1.Panel1MinSize = 200;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.canvas);
+            this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer1.Panel2MinSize = 400;
+            this.splitContainer1.Size = new System.Drawing.Size(1080, 600);
+            this.splitContainer1.SplitterDistance = 279;
+            this.splitContainer1.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 480);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(749, 519);
-            this.MinimumSize = new System.Drawing.Size(749, 519);
+            this.ClientSize = new System.Drawing.Size(1080, 600);
+            this.Controls.Add(this.splitContainer1);
+            this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "MainForm";
             this.Text = "Tesseract";
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.colorGroupBox.ResumeLayout(false);
             this.colorGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -320,11 +340,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationX)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.size)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -346,12 +368,11 @@
         private System.Windows.Forms.TrackBar rotationY;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar rotationX;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button resetSize;
         private System.Windows.Forms.TrackBar size;
         private System.Windows.Forms.Panel canvas;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

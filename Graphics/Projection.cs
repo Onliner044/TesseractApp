@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Numerics;
 
-namespace Drawing3D
+namespace Graphics
 {
     internal class Projection
     {
@@ -14,6 +14,11 @@ namespace Drawing3D
 
         public Projection(SizeF size)
         {
+            SetBounds(size);
+        }
+
+        internal void SetBounds(SizeF size)
+        {
             _resolution = size.Height;
             _fieldOfView = Converter.DegToRad(70.0f);
             _z0 = (_resolution / 2.0f) / (float)Math.Tan((_fieldOfView / 2.0f) * (float)Math.PI / 180.0f);
@@ -23,7 +28,7 @@ namespace Drawing3D
 
         internal PointF ProjectVector(Vector3 vector)
         {
-            var point = new PointF();
+            PointF point = new PointF();
             point.X = vector.X * _z0 / (_z0 + vector.Z) + _halfBoundSize.Width;
             point.Y = -vector.Y * _z0 / (_z0 + vector.Z) + _halfBoundSize.Height;
 

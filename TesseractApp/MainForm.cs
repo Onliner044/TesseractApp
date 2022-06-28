@@ -17,14 +17,15 @@ namespace TesseractApp
             InitializeComponent();
 
             _graphics3D = new Graphics3D(canvas);
+            _graphics3D.Paint += _graphics3D_Paint;
 
-            _tesseract = new Tesseract(size.Value);
+            _tesseract = new Tesseract(1);
             _tesseract.Transform.Origin = -Vector3.One * _tesseract.EdgeLength / 2.0f;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        private void _graphics3D_Paint(object sender, PaintEventArgs e)
         {
-            base.OnPaint(e);
+            _tesseract.Transform.Scaling = Vector3.One * canvas.Height / 2.0f * (1.0f + size.Value / (float)size.Maximum);
 
             _graphics3D.Clear(Color.White);
 
@@ -37,7 +38,7 @@ namespace TesseractApp
         {
             _tesseract.Pen.Color = Color.FromArgb(redValue.Value, greenValue.Value, blueValue.Value);
 
-            Invalidate();
+            _graphics3D.Invalidate();
         }
 
         private void rotation_Scroll(object sender, EventArgs e)
@@ -50,7 +51,12 @@ namespace TesseractApp
             _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
             _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
 
-            Invalidate();
+            _graphics3D.Invalidate();
+        }
+
+        private void size_Scroll(object sender, EventArgs e)
+        {
+            _graphics3D.Invalidate();
         }
 
         private void resetRotationButton_Click(object sender, EventArgs e)
@@ -61,7 +67,7 @@ namespace TesseractApp
             rotationY.Value = 0;
             rotationZ.Value = 0;
 
-            Invalidate();
+            _graphics3D.Invalidate();
         }
 
         private void resetColor_Click(object sender, EventArgs e)
@@ -72,22 +78,20 @@ namespace TesseractApp
             greenValue.Value = 0;
             blueValue.Value = 0;
 
-            Invalidate();
+            _graphics3D.Invalidate();
         }
 
         private void resetSize_Click(object sender, EventArgs e)
         {
-            size.Value = size.Maximum / 2;
+            size.Value = 0;
             _tesseract.Transform.Scaling = Vector3.One;
 
-            Invalidate();
+            _graphics3D.Invalidate();
         }
 
-        private void size_Scroll(object sender, EventArgs e)
+        private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            _tesseract.Transform.Scaling = Vector3.One * size.Value / _tesseract.EdgeLength;
-
-            Invalidate();
+            _graphics3D.Invalidate();
         }
     }
 }
