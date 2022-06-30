@@ -42,6 +42,18 @@ namespace Graphics
             _pen.Color = color;
         }
 
+        public void FillPolygon(Vector3[] points)
+        {
+            PointF[] pointsF = new PointF[points.Length];
+
+            for (int i = 0; i < points.Length; i++)
+            {
+                pointsF[i] = ProjectVector(points[i]);
+            }
+
+            _graphics.FillPolygon(_pen.Brush, pointsF);
+        }
+
         public void DrawLine(Vector3 point1, Vector3 point2)
         {
             PointF pointF1 = ProjectVector(point1);

@@ -48,6 +48,7 @@
     <Compile Include="Contracts\IDrawable.cs" />
     <Compile Include="Primitives\Cube.cs" />
     <Compile Include="Primitives\Line.cs" />
+    <Compile Include="Primitives\Figure.cs" />
     <Compile Include="Primitives\Primitive.cs" />
     <Compile Include="Projection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

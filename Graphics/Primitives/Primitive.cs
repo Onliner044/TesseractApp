@@ -6,11 +6,9 @@ namespace Graphics.Primitives
     public abstract class Primitive : IDrawable
     {
         public Transformation Transform { get; set; }
-        public Pen Pen { get; protected set; }
 
         public Primitive()
         {
-            Pen = new Pen(Color.Black);
             Transform = new Transformation();
         }
 
