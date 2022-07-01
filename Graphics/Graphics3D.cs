@@ -10,9 +10,10 @@ namespace Graphics
     {
         public event PaintEventHandler Paint;
 
+        public Control Control { get; }
+
         private Pen _pen;
         private Projection _projection;
-        private Control _control;
         private System.Drawing.Graphics _graphics;
 
         private Matrix4x4 _localTransform;
@@ -21,7 +22,7 @@ namespace Graphics
 
         public Graphics3D(Control control)
         {
-            _control = control;
+            Control = control;
             _pen = new Pen(Color.Black);
             _projection = new Projection(SizeF.Empty);
 
@@ -30,19 +31,19 @@ namespace Graphics
             _transformations = new Stack<Matrix4x4>();
 
             Paint += OnPaint;
-            _control.Paint += control_Paint;
+            Control.Paint += control_Paint;
         }
 
         public void SetDoubleBuffered(bool enabled)
         {
             typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
                 | BindingFlags.Instance | BindingFlags.NonPublic, null,
-                _control, new object[] { enabled });
+                Control, new object[] { enabled });
         }
 
         public void Invalidate()
         {
-            _control.Invalidate();
+            Control.Invalidate();
         }
 
         public void SetColor(Color color)

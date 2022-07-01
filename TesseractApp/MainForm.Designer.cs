@@ -28,7 +28,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sizeGroupBox = new System.Windows.Forms.GroupBox();
             this.resetSize = new System.Windows.Forms.Button();
-            this.size = new System.Windows.Forms.TrackBar();
+            this.shapeSize = new System.Windows.Forms.TrackBar();
             this.rotationGroupBox = new System.Windows.Forms.GroupBox();
             this.resetRotation = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -78,7 +78,7 @@
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.sizeGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.size)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeSize)).BeginInit();
             this.rotationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationY)).BeginInit();
@@ -168,7 +168,7 @@
             // sizeGroupBox
             // 
             this.sizeGroupBox.Controls.Add(this.resetSize);
-            this.sizeGroupBox.Controls.Add(this.size);
+            this.sizeGroupBox.Controls.Add(this.shapeSize);
             this.sizeGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sizeGroupBox.Location = new System.Drawing.Point(178, 463);
             this.sizeGroupBox.Name = "sizeGroupBox";
@@ -190,18 +190,18 @@
             this.resetSize.UseVisualStyleBackColor = true;
             this.resetSize.Click += new System.EventHandler(this.resetSize_Click);
             // 
-            // size
+            // shapeSize
             // 
-            this.size.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.shapeSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.size.Location = new System.Drawing.Point(6, 24);
-            this.size.Maximum = 100;
-            this.size.Minimum = -100;
-            this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(157, 45);
-            this.size.TabIndex = 0;
-            this.size.TickFrequency = 5;
-            this.size.Scroll += new System.EventHandler(this.size_Scroll);
+            this.shapeSize.Location = new System.Drawing.Point(6, 24);
+            this.shapeSize.Maximum = 100;
+            this.shapeSize.Minimum = -100;
+            this.shapeSize.Name = "shapeSize";
+            this.shapeSize.Size = new System.Drawing.Size(157, 45);
+            this.shapeSize.TabIndex = 0;
+            this.shapeSize.TickFrequency = 5;
+            this.shapeSize.ValueChanged += new System.EventHandler(this.shapeSize_ValueChanged);
             // 
             // rotationGroupBox
             // 
@@ -733,7 +733,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.sizeGroupBox.ResumeLayout(false);
             this.sizeGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.size)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeSize)).EndInit();
             this.rotationGroupBox.ResumeLayout(false);
             this.rotationGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rotationZ)).EndInit();
@@ -781,7 +781,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox sizeGroupBox;
         private System.Windows.Forms.Button resetSize;
-        private System.Windows.Forms.TrackBar size;
+        private System.Windows.Forms.TrackBar shapeSize;
         private System.Windows.Forms.GroupBox rotationGroupBox;
         private System.Windows.Forms.Button resetRotation;
         private System.Windows.Forms.Label label3;

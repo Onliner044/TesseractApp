@@ -18,7 +18,9 @@ namespace TesseractApp
 
             _graphics3D = new Graphics3D(canvas);
             _graphics3D.SetDoubleBuffered(true);
+
             _graphics3D.Paint += graphics3D_Paint;
+            _graphics3D.Control.MouseWheel += graphics3D_Control_MouseWheel;
 
             _tesseract = new Tesseract(1);
             _tesseract.Transform.Origin = -Vector3.One * _tesseract.EdgeLength / 2.0f;
@@ -26,13 +28,29 @@ namespace TesseractApp
 
         private void graphics3D_Paint(object sender, PaintEventArgs e)
         {
-            _tesseract.Transform.Scaling = Vector3.One * canvas.Height / 2.0f * (1.0f + size.Value / (float)size.Maximum);
+            _tesseract.Transform.Scaling = Vector3.One * canvas.Height / 2.0f * (1.0f + shapeSize.Value / (float)shapeSize.Maximum);
 
             _graphics3D.Clear(Color.White);
 
             _graphics3D.PushTransform();
             _tesseract.Draw(_graphics3D);
             _graphics3D.PopTransform();
+        }
+
+        private void graphics3D_Control_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int deltaScroll = Math.Abs(e.Delta) / e.Delta * shapeSize.TickFrequency;
+
+            if (shapeSize.Value + deltaScroll > shapeSize.Maximum)
+            {
+                deltaScroll = shapeSize.Maximum - shapeSize.Value;
+            }
+            else if (shapeSize.Value + deltaScroll < shapeSize.Minimum) 
+            {
+                deltaScroll = shapeSize.Minimum - shapeSize.Value;
+            }
+
+            shapeSize.Value += deltaScroll;
         }
 
         private void outlineColor_Scroll(object sender, EventArgs e)
@@ -69,7 +87,7 @@ namespace TesseractApp
             _graphics3D.Invalidate();
         }
 
-        private void size_Scroll(object sender, EventArgs e)
+        private void shapeSize_ValueChanged(object sender, EventArgs e)
         {
             _graphics3D.Invalidate();
         }
@@ -141,7 +159,7 @@ namespace TesseractApp
 
         private void resetSize_Click(object sender, EventArgs e)
         {
-            size.Value = 0;
+            shapeSize.Value = 0;
             _tesseract.Transform.Scaling = Vector3.One;
 
             _graphics3D.Invalidate();
