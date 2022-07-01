@@ -12,6 +12,9 @@ namespace TesseractApp
         private Graphics3D _graphics3D;
         private Tesseract _tesseract;
 
+        private Point _lastMouseClickLocation;
+        private Point _mouseLocation;
+
         public MainForm()
         {
             InitializeComponent();
@@ -21,9 +24,34 @@ namespace TesseractApp
 
             _graphics3D.Paint += graphics3D_Paint;
             _graphics3D.Control.MouseWheel += graphics3D_Control_MouseWheel;
+            _graphics3D.Control.MouseDown += graphics3D_Control_MouseDown;
+            _graphics3D.Control.MouseMove += graphics3D_Control_MouseMove;
+
+            KeyDown += MainForm_KeyDown;
+            KeyUp += MainForm_KeyUp;
 
             _tesseract = new Tesseract(1);
             _tesseract.Transform.Origin = -Vector3.One * _tesseract.EdgeLength / 2.0f;
+        }
+
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+            {
+                _lastMouseClickLocation = _mouseLocation;
+                _lastMouseClickLocation.X -= rotationY.Value;
+                _lastMouseClickLocation.Y -= rotationX.Value;
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                _lastMouseClickLocation = _mouseLocation;
+                _lastMouseClickLocation.X += rotationZ.Value;
+                _lastMouseClickLocation.Y -= rotationX.Value;
+            }
         }
 
         private void graphics3D_Paint(object sender, PaintEventArgs e)
@@ -53,6 +81,45 @@ namespace TesseractApp
             shapeSize.Value += deltaScroll;
         }
 
+        private void graphics3D_Control_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _lastMouseClickLocation = e.Location;
+                _lastMouseClickLocation.Y -= rotationX.Value;
+
+                if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl & System.Windows.Input.Key.RightCtrl))
+                {
+                    _lastMouseClickLocation.X += rotationZ.Value;
+                }
+                else
+                {
+                    _lastMouseClickLocation.X -= rotationY.Value;
+                }
+            }
+        }
+
+        private void graphics3D_Control_MouseMove(object sender, MouseEventArgs e)
+        {
+            _mouseLocation = e.Location;
+
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
+            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl & System.Windows.Input.Key.RightCtrl))
+            {
+                rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
+                rotationZ.Value = (360 + (_lastMouseClickLocation.X - e.X) % 360) % 360;
+            }
+            else 
+            { 
+                rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
+                rotationY.Value = (360 + (e.X - _lastMouseClickLocation.X) % 360) % 360;
+            }
+        }
+
         private void outlineColor_Scroll(object sender, EventArgs e)
         {
             _tesseract.OutlineColor = Color.FromArgb(alphaOutline.Value, redOutline.Value, greenOutline.Value, blueOutline.Value);
@@ -74,15 +141,22 @@ namespace TesseractApp
             _graphics3D.Invalidate();
         }
 
-        private void rotation_Scroll(object sender, EventArgs e)
+        private void rotation_ValueChanged(object sender, EventArgs e)
         {
             float x = Converter.DegToRad(rotationX.Value);
             float y = Converter.DegToRad(rotationY.Value);
             float z = Converter.DegToRad(rotationZ.Value);
 
-            _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, x);
-            _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
-            _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
+            if (eulerRotation.Checked) 
+            { 
+                _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, x);
+                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
+                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
+            }
+            else
+            {
+                _tesseract.Transform.Rotation = Quaternion.CreateFromYawPitchRoll(y, x, z);
+            }
 
             _graphics3D.Invalidate();
         }

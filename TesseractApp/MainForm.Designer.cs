@@ -72,6 +72,8 @@
             this.alphaFill = new System.Windows.Forms.TrackBar();
             this.greenFill = new System.Windows.Forms.TrackBar();
             this.redFill = new System.Windows.Forms.TrackBar();
+            this.quaternionRotation = new System.Windows.Forms.RadioButton();
+            this.eulerRotation = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -207,6 +209,8 @@
             // 
             // rotationGroupBox
             // 
+            this.rotationGroupBox.Controls.Add(this.eulerRotation);
+            this.rotationGroupBox.Controls.Add(this.quaternionRotation);
             this.rotationGroupBox.Controls.Add(this.resetRotation);
             this.rotationGroupBox.Controls.Add(this.label3);
             this.rotationGroupBox.Controls.Add(this.label2);
@@ -238,7 +242,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 116);
+            this.label3.Location = new System.Drawing.Point(9, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 13);
             this.label3.TabIndex = 0;
@@ -247,7 +251,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 70);
+            this.label2.Location = new System.Drawing.Point(9, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 0;
@@ -257,30 +261,30 @@
             // 
             this.rotationZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rotationZ.Location = new System.Drawing.Point(30, 108);
+            this.rotationZ.Location = new System.Drawing.Point(27, 152);
             this.rotationZ.Maximum = 360;
             this.rotationZ.Name = "rotationZ";
-            this.rotationZ.Size = new System.Drawing.Size(91, 45);
-            this.rotationZ.TabIndex = 2;
+            this.rotationZ.Size = new System.Drawing.Size(101, 45);
+            this.rotationZ.TabIndex = 4;
             this.rotationZ.TickFrequency = 5;
-            this.rotationZ.Scroll += new System.EventHandler(this.rotation_Scroll);
+            this.rotationZ.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
             // 
             // rotationY
             // 
             this.rotationY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rotationY.Location = new System.Drawing.Point(30, 63);
+            this.rotationY.Location = new System.Drawing.Point(27, 107);
             this.rotationY.Maximum = 360;
             this.rotationY.Name = "rotationY";
-            this.rotationY.Size = new System.Drawing.Size(91, 45);
-            this.rotationY.TabIndex = 1;
+            this.rotationY.Size = new System.Drawing.Size(101, 45);
+            this.rotationY.TabIndex = 3;
             this.rotationY.TickFrequency = 5;
-            this.rotationY.Scroll += new System.EventHandler(this.rotation_Scroll);
+            this.rotationY.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Location = new System.Drawing.Point(9, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 13);
             this.label1.TabIndex = 0;
@@ -290,13 +294,13 @@
             // 
             this.rotationX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rotationX.Location = new System.Drawing.Point(30, 19);
+            this.rotationX.Location = new System.Drawing.Point(27, 63);
             this.rotationX.Maximum = 360;
             this.rotationX.Name = "rotationX";
-            this.rotationX.Size = new System.Drawing.Size(91, 45);
-            this.rotationX.TabIndex = 0;
+            this.rotationX.Size = new System.Drawing.Size(101, 45);
+            this.rotationX.TabIndex = 2;
             this.rotationX.TickFrequency = 5;
-            this.rotationX.Scroll += new System.EventHandler(this.rotation_Scroll);
+            this.rotationX.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
             // 
             // verticesColorGroupBox
             // 
@@ -718,12 +722,39 @@
             this.redFill.TickFrequency = 5;
             this.redFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
             // 
+            // quaternionRotation
+            // 
+            this.quaternionRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.quaternionRotation.AutoSize = true;
+            this.quaternionRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.quaternionRotation.Location = new System.Drawing.Point(28, 37);
+            this.quaternionRotation.Name = "quaternionRotation";
+            this.quaternionRotation.Size = new System.Drawing.Size(88, 20);
+            this.quaternionRotation.TabIndex = 1;
+            this.quaternionRotation.Text = "quaternion";
+            this.quaternionRotation.UseVisualStyleBackColor = true;
+            // 
+            // eulerRotation
+            // 
+            this.eulerRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.eulerRotation.AutoSize = true;
+            this.eulerRotation.Checked = true;
+            this.eulerRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.eulerRotation.Location = new System.Drawing.Point(28, 19);
+            this.eulerRotation.Name = "eulerRotation";
+            this.eulerRotation.Size = new System.Drawing.Size(55, 20);
+            this.eulerRotation.TabIndex = 0;
+            this.eulerRotation.TabStop = true;
+            this.eulerRotation.Text = "euler";
+            this.eulerRotation.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "MainForm";
             this.Text = "Tesseract";
@@ -827,6 +858,8 @@
         private System.Windows.Forms.TrackBar alphaFill;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.TrackBar alphaVertices;
+        private System.Windows.Forms.RadioButton eulerRotation;
+        private System.Windows.Forms.RadioButton quaternionRotation;
     }
 }
 
