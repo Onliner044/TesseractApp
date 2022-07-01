@@ -6,8 +6,8 @@ namespace Graphics.Primitives
 {
     public class Quad : Figure
     {
-        public override Color OutlineColor 
-        { 
+        public override Color OutlineColor
+        {
             get => base.OutlineColor;
             set
             {
@@ -36,7 +36,7 @@ namespace Graphics.Primitives
             if (HasOutline)
             {
                 graphics.SetColor(OutlineColor);
-                
+
                 graphics.PushTransform();
                 for (int i = 0; i < 4; i++)
                 {

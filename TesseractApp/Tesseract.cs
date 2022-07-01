@@ -91,7 +91,7 @@ namespace TesseractApp
 
             OuterCube = new Cube(EdgeLength)
             {
-                HasFill= false,
+                HasFill = false,
             };
 
             InnerCube = new Cube(EdgeLength);

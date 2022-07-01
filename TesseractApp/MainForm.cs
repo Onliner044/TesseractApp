@@ -1,10 +1,8 @@
 ﻿using Graphics;
-using Graphics.Primitives;
 using Graphics.Utils;
 using System;
 using System.Drawing;
 using System.Numerics;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace TesseractApp

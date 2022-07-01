@@ -30,7 +30,7 @@ namespace Graphics
             _transformations = new Stack<Matrix4x4>();
 
             Paint += OnPaint;
-            _control.Paint += _control_Paint;
+            _control.Paint += control_Paint;
         }
 
         public void SetDoubleBuffered(bool enabled)
@@ -73,7 +73,7 @@ namespace Graphics
         public void DrawCircle(Vector3 point, float size)
         {
             PointF pointF = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
-            
+
             _graphics.FillEllipse(_pen.Brush, pointF.X, pointF.Y, size, size);
         }
 
@@ -121,10 +121,10 @@ namespace Graphics
         private PointF ProjectVector(Vector3 point)
         {
             point = Vector3.Transform(point, _localTransform * _globalTransform);
-            return _projection.ProjectVector(point);
+            return _projection.OrthographicProjection(point);
         }
 
-        private void _control_Paint(object sender, PaintEventArgs e)
+        private void control_Paint(object sender, PaintEventArgs e)
         {
             Paint?.Invoke(sender, e);
         }

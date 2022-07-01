@@ -1,5 +1,4 @@
 ﻿using Graphics.Contracts;
-using System.Drawing;
 
 namespace Graphics.Primitives
 {
