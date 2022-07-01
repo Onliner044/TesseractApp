@@ -14,6 +14,7 @@ namespace TesseractApp
 
         private Point _lastMouseClickLocation;
         private Point _mouseLocation;
+        private bool _isControlKeyDown;
 
         public MainForm()
         {
@@ -38,6 +39,8 @@ namespace TesseractApp
         {
             if (e.KeyCode == Keys.ControlKey)
             {
+                _isControlKeyDown = false;
+
                 _lastMouseClickLocation = _mouseLocation;
                 _lastMouseClickLocation.X -= rotationY.Value;
                 _lastMouseClickLocation.Y -= rotationX.Value;
@@ -48,6 +51,8 @@ namespace TesseractApp
         {
             if (e.Control)
             {
+                _isControlKeyDown = true;
+                
                 _lastMouseClickLocation = _mouseLocation;
                 _lastMouseClickLocation.X += rotationZ.Value;
                 _lastMouseClickLocation.Y -= rotationX.Value;
@@ -88,7 +93,7 @@ namespace TesseractApp
                 _lastMouseClickLocation = e.Location;
                 _lastMouseClickLocation.Y -= rotationX.Value;
 
-                if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl & System.Windows.Input.Key.RightCtrl))
+                if (_isControlKeyDown)
                 {
                     _lastMouseClickLocation.X += rotationZ.Value;
                 }
@@ -108,7 +113,7 @@ namespace TesseractApp
                 return;
             }
 
-            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl & System.Windows.Input.Key.RightCtrl))
+            if (_isControlKeyDown)
             {
                 rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
                 rotationZ.Value = (360 + (_lastMouseClickLocation.X - e.X) % 360) % 360;
