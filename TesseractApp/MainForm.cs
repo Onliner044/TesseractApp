@@ -39,21 +39,21 @@ namespace TesseractApp
 
         private void outlineColor_Scroll(object sender, EventArgs e)
         {
-            _tesseract.OutlineColor = Color.FromArgb(outlineRedValue.Value, outlineGreenValue.Value, outlineBlueValue.Value);
+            _tesseract.OutlineColor = Color.FromArgb(alphaOutline.Value, redOutline.Value, greenOutline.Value, blueOutline.Value);
 
             _graphics3D.Invalidate();
         }
 
         private void fillColor_Scroll(object sender, EventArgs e)
         {
-            _tesseract.FillColor = Color.FromArgb(fillRedValue.Value, fillGreenValue.Value, fillBlueValue.Value);
+            _tesseract.FillColor = Color.FromArgb(alphaFill.Value, redFill.Value, greenFill.Value, blueFill.Value);
 
             _graphics3D.Invalidate();
         }
 
         private void verticesColor_Scroll(object sender, EventArgs e)
         {
-            _tesseract.VerticesColor = Color.FromArgb(verticesRedValue.Value, verticesGreenValue.Value, verticesBlueValue.Value);
+            _tesseract.VerticesColor = Color.FromArgb(alphaVertices.Value, redVertices.Value, greenVertices.Value, blueVertices.Value);
 
             _graphics3D.Invalidate();
         }
@@ -94,24 +94,14 @@ namespace TesseractApp
             _graphics3D.Invalidate();
         }
 
-        private void resetRotationButton_Click(object sender, EventArgs e)
-        {
-            _tesseract.Transform.Rotation = Quaternion.Identity;
-
-            rotationX.Value = 0;
-            rotationY.Value = 0;
-            rotationZ.Value = 0;
-
-            _graphics3D.Invalidate();
-        }
-
-        private void resetOuterColor_Click(object sender, EventArgs e)
+        private void resetOutlineColor_Click(object sender, EventArgs e)
         {
             _tesseract.OutlineColor = Color.Black;
 
-            outlineRedValue.Value = 0;
-            outlineGreenValue.Value = 0;
-            outlineBlueValue.Value = 0;
+            redOutline.Value = 0;
+            greenOutline.Value = 0;
+            blueOutline.Value = 0;
+            alphaOutline.Value = 255;
 
             _graphics3D.Invalidate();
         }
@@ -120,9 +110,33 @@ namespace TesseractApp
         {
             _tesseract.FillColor = Color.Black;
 
-            fillRedValue.Value = 0;
-            fillGreenValue.Value = 0;
-            fillBlueValue.Value = 0;
+            redFill.Value = 0;
+            greenFill.Value = 0;
+            blueFill.Value = 0;
+            alphaFill.Value = 255;
+
+            _graphics3D.Invalidate();
+        }
+
+        private void resetVerticesColor_Click(object sender, EventArgs e)
+        {
+            _tesseract.VerticesColor = Color.Black;
+
+            redVertices.Value = 0;
+            greenVertices.Value = 0;
+            blueVertices.Value = 0;
+            alphaVertices.Value = 255;
+
+            _graphics3D.Invalidate();
+        }
+
+        private void resetRotationButton_Click(object sender, EventArgs e)
+        {
+            _tesseract.Transform.Rotation = Quaternion.Identity;
+
+            rotationX.Value = 0;
+            rotationY.Value = 0;
+            rotationZ.Value = 0;
 
             _graphics3D.Invalidate();
         }
@@ -140,17 +154,6 @@ namespace TesseractApp
             verticesCheckBox.Checked = true;
             outlinesCheckBox.Checked = true;
             fillCheckBox.Checked = true;
-        }
-
-        private void resetVerticesColor_Click(object sender, EventArgs e)
-        {
-            _tesseract.VerticesColor = Color.Black;
-
-            verticesRedValue.Value = 0;
-            verticesGreenValue.Value = 0;
-            verticesBlueValue.Value = 0;
-
-            _graphics3D.Invalidate();
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
