@@ -173,7 +173,7 @@
             this.sizeGroupBox.Location = new System.Drawing.Point(178, 463);
             this.sizeGroupBox.Name = "sizeGroupBox";
             this.sizeGroupBox.Size = new System.Drawing.Size(169, 224);
-            this.sizeGroupBox.TabIndex = 0;
+            this.sizeGroupBox.TabIndex = 5;
             this.sizeGroupBox.TabStop = false;
             this.sizeGroupBox.Text = "Size";
             // 
@@ -185,7 +185,7 @@
             this.resetSize.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetSize.Name = "resetSize";
             this.resetSize.Size = new System.Drawing.Size(75, 23);
-            this.resetSize.TabIndex = 2;
+            this.resetSize.TabIndex = 10;
             this.resetSize.Text = "Reset";
             this.resetSize.UseVisualStyleBackColor = true;
             this.resetSize.Click += new System.EventHandler(this.resetSize_Click);
@@ -216,7 +216,7 @@
             this.rotationGroupBox.Location = new System.Drawing.Point(178, 233);
             this.rotationGroupBox.Name = "rotationGroupBox";
             this.rotationGroupBox.Size = new System.Drawing.Size(169, 224);
-            this.rotationGroupBox.TabIndex = 0;
+            this.rotationGroupBox.TabIndex = 4;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
             // 
@@ -228,7 +228,7 @@
             this.resetRotation.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetRotation.Name = "resetRotation";
             this.resetRotation.Size = new System.Drawing.Size(75, 23);
-            this.resetRotation.TabIndex = 2;
+            this.resetRotation.TabIndex = 10;
             this.resetRotation.Text = "Reset";
             this.resetRotation.UseVisualStyleBackColor = true;
             this.resetRotation.Click += new System.EventHandler(this.resetRotationButton_Click);
@@ -259,7 +259,7 @@
             this.rotationZ.Maximum = 360;
             this.rotationZ.Name = "rotationZ";
             this.rotationZ.Size = new System.Drawing.Size(126, 45);
-            this.rotationZ.TabIndex = 0;
+            this.rotationZ.TabIndex = 2;
             this.rotationZ.TickFrequency = 5;
             this.rotationZ.Scroll += new System.EventHandler(this.rotation_Scroll);
             // 
@@ -271,7 +271,7 @@
             this.rotationY.Maximum = 360;
             this.rotationY.Name = "rotationY";
             this.rotationY.Size = new System.Drawing.Size(126, 45);
-            this.rotationY.TabIndex = 0;
+            this.rotationY.TabIndex = 1;
             this.rotationY.TickFrequency = 5;
             this.rotationY.Scroll += new System.EventHandler(this.rotation_Scroll);
             // 
@@ -323,7 +323,7 @@
             this.resetVerticesColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetVerticesColor.Name = "resetVerticesColor";
             this.resetVerticesColor.Size = new System.Drawing.Size(75, 23);
-            this.resetVerticesColor.TabIndex = 2;
+            this.resetVerticesColor.TabIndex = 10;
             this.resetVerticesColor.Text = "Reset";
             this.resetVerticesColor.UseVisualStyleBackColor = true;
             this.resetVerticesColor.Click += new System.EventHandler(this.resetVerticesColor_Click);
@@ -372,7 +372,7 @@
             this.blueVertices.Maximum = 255;
             this.blueVertices.Name = "blueVertices";
             this.blueVertices.Size = new System.Drawing.Size(129, 45);
-            this.blueVertices.TabIndex = 0;
+            this.blueVertices.TabIndex = 2;
             this.blueVertices.TickFrequency = 5;
             this.blueVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
             // 
@@ -384,7 +384,7 @@
             this.greenVertices.Maximum = 255;
             this.greenVertices.Name = "greenVertices";
             this.greenVertices.Size = new System.Drawing.Size(129, 45);
-            this.greenVertices.TabIndex = 0;
+            this.greenVertices.TabIndex = 1;
             this.greenVertices.TickFrequency = 5;
             this.greenVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
             // 
@@ -396,7 +396,7 @@
             this.alphaVertices.Maximum = 255;
             this.alphaVertices.Name = "alphaVertices";
             this.alphaVertices.Size = new System.Drawing.Size(129, 45);
-            this.alphaVertices.TabIndex = 0;
+            this.alphaVertices.TabIndex = 3;
             this.alphaVertices.TickFrequency = 5;
             this.alphaVertices.Value = 255;
             this.alphaVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
@@ -423,7 +423,7 @@
             this.optionsGroupBox.Location = new System.Drawing.Point(178, 3);
             this.optionsGroupBox.Name = "optionsGroupBox";
             this.optionsGroupBox.Size = new System.Drawing.Size(169, 224);
-            this.optionsGroupBox.TabIndex = 1;
+            this.optionsGroupBox.TabIndex = 3;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Options";
             // 
@@ -435,7 +435,7 @@
             this.resetOptions.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetOptions.Name = "resetOptions";
             this.resetOptions.Size = new System.Drawing.Size(75, 23);
-            this.resetOptions.TabIndex = 2;
+            this.resetOptions.TabIndex = 10;
             this.resetOptions.Text = "Reset";
             this.resetOptions.UseVisualStyleBackColor = true;
             this.resetOptions.Click += new System.EventHandler(this.resetOptions_Click);
@@ -449,7 +449,7 @@
             this.fillCheckBox.Location = new System.Drawing.Point(40, 133);
             this.fillCheckBox.Name = "fillCheckBox";
             this.fillCheckBox.Size = new System.Drawing.Size(40, 21);
-            this.fillCheckBox.TabIndex = 0;
+            this.fillCheckBox.TabIndex = 2;
             this.fillCheckBox.Text = "fill";
             this.fillCheckBox.UseVisualStyleBackColor = true;
             this.fillCheckBox.CheckedChanged += new System.EventHandler(this.fillCheckBox_CheckedChanged);
@@ -463,7 +463,7 @@
             this.verticesCheckBox.Location = new System.Drawing.Point(40, 87);
             this.verticesCheckBox.Name = "verticesCheckBox";
             this.verticesCheckBox.Size = new System.Drawing.Size(76, 21);
-            this.verticesCheckBox.TabIndex = 0;
+            this.verticesCheckBox.TabIndex = 1;
             this.verticesCheckBox.Text = "vertices";
             this.verticesCheckBox.UseVisualStyleBackColor = true;
             this.verticesCheckBox.CheckedChanged += new System.EventHandler(this.verticesCheckBox_CheckedChanged);
@@ -509,7 +509,7 @@
             this.resetOutlineColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetOutlineColor.Name = "resetOutlineColor";
             this.resetOutlineColor.Size = new System.Drawing.Size(75, 23);
-            this.resetOutlineColor.TabIndex = 2;
+            this.resetOutlineColor.TabIndex = 10;
             this.resetOutlineColor.Text = "Reset";
             this.resetOutlineColor.UseVisualStyleBackColor = true;
             this.resetOutlineColor.Click += new System.EventHandler(this.resetOutlineColor_Click);
@@ -558,7 +558,7 @@
             this.alphaOutline.Maximum = 255;
             this.alphaOutline.Name = "alphaOutline";
             this.alphaOutline.Size = new System.Drawing.Size(129, 45);
-            this.alphaOutline.TabIndex = 0;
+            this.alphaOutline.TabIndex = 3;
             this.alphaOutline.TickFrequency = 5;
             this.alphaOutline.Value = 255;
             this.alphaOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
@@ -571,7 +571,7 @@
             this.blueOutline.Maximum = 255;
             this.blueOutline.Name = "blueOutline";
             this.blueOutline.Size = new System.Drawing.Size(129, 45);
-            this.blueOutline.TabIndex = 0;
+            this.blueOutline.TabIndex = 2;
             this.blueOutline.TickFrequency = 5;
             this.blueOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
             // 
@@ -583,7 +583,7 @@
             this.greenOutline.Maximum = 255;
             this.greenOutline.Name = "greenOutline";
             this.greenOutline.Size = new System.Drawing.Size(129, 45);
-            this.greenOutline.TabIndex = 0;
+            this.greenOutline.TabIndex = 1;
             this.greenOutline.TickFrequency = 5;
             this.greenOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
             // 
@@ -614,7 +614,7 @@
             this.fillColorGroupBox.Location = new System.Drawing.Point(3, 233);
             this.fillColorGroupBox.Name = "fillColorGroupBox";
             this.fillColorGroupBox.Size = new System.Drawing.Size(169, 224);
-            this.fillColorGroupBox.TabIndex = 0;
+            this.fillColorGroupBox.TabIndex = 1;
             this.fillColorGroupBox.TabStop = false;
             this.fillColorGroupBox.Text = "Fill color";
             // 
@@ -626,7 +626,7 @@
             this.resetFillColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetFillColor.Name = "resetFillColor";
             this.resetFillColor.Size = new System.Drawing.Size(75, 23);
-            this.resetFillColor.TabIndex = 2;
+            this.resetFillColor.TabIndex = 10;
             this.resetFillColor.Text = "Reset";
             this.resetFillColor.UseVisualStyleBackColor = true;
             this.resetFillColor.Click += new System.EventHandler(this.resetFillColor_Click);
@@ -675,7 +675,7 @@
             this.blueFill.Maximum = 255;
             this.blueFill.Name = "blueFill";
             this.blueFill.Size = new System.Drawing.Size(129, 45);
-            this.blueFill.TabIndex = 0;
+            this.blueFill.TabIndex = 2;
             this.blueFill.TickFrequency = 5;
             this.blueFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
             // 
@@ -687,7 +687,7 @@
             this.alphaFill.Maximum = 255;
             this.alphaFill.Name = "alphaFill";
             this.alphaFill.Size = new System.Drawing.Size(129, 45);
-            this.alphaFill.TabIndex = 0;
+            this.alphaFill.TabIndex = 3;
             this.alphaFill.TickFrequency = 5;
             this.alphaFill.Value = 255;
             this.alphaFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
@@ -700,7 +700,7 @@
             this.greenFill.Maximum = 255;
             this.greenFill.Name = "greenFill";
             this.greenFill.Size = new System.Drawing.Size(129, 45);
-            this.greenFill.TabIndex = 0;
+            this.greenFill.TabIndex = 1;
             this.greenFill.TickFrequency = 5;
             this.greenFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
             // 
