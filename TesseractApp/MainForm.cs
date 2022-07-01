@@ -4,6 +4,7 @@ using Graphics.Utils;
 using System;
 using System.Drawing;
 using System.Numerics;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TesseractApp
@@ -18,6 +19,7 @@ namespace TesseractApp
             InitializeComponent();
 
             _graphics3D = new Graphics3D(canvas);
+            _graphics3D.SetDoubleBuffered(true);
             _graphics3D.Paint += graphics3D_Paint;
 
             _tesseract = new Tesseract(1);

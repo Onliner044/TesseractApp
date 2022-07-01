@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Graphics
@@ -30,6 +31,13 @@ namespace Graphics
 
             Paint += OnPaint;
             _control.Paint += _control_Paint;
+        }
+
+        public void SetDoubleBuffered(bool enabled)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+                | BindingFlags.Instance | BindingFlags.NonPublic, null,
+                _control, new object[] { enabled });
         }
 
         public void Invalidate()
