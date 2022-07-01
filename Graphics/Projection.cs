@@ -21,7 +21,7 @@ namespace Graphics
         {
             PointF point = new PointF();
             point.X = vector.X + _halfBoundSize.Width;
-            point.Y = vector.Y + _halfBoundSize.Height;
+            point.Y = -vector.Y + _halfBoundSize.Height;
 
             return point;
         }
