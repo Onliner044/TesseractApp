@@ -23,13 +23,14 @@
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
-            this.canvas = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sizeGroupBox = new System.Windows.Forms.GroupBox();
             this.resetSize = new System.Windows.Forms.Button();
             this.shapeSize = new System.Windows.Forms.TrackBar();
             this.rotationGroupBox = new System.Windows.Forms.GroupBox();
+            this.eulerRotation = new System.Windows.Forms.RadioButton();
+            this.quaternionRotation = new System.Windows.Forms.RadioButton();
             this.resetRotation = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -72,12 +73,11 @@
             this.alphaFill = new System.Windows.Forms.TrackBar();
             this.greenFill = new System.Windows.Forms.TrackBar();
             this.redFill = new System.Windows.Forms.TrackBar();
-            this.quaternionRotation = new System.Windows.Forms.RadioButton();
-            this.eulerRotation = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.canvas = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.sizeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shapeSize)).BeginInit();
@@ -113,37 +113,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.alphaFill)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenFill)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.redFill)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
-            // canvas
+            // splitContainer
             // 
-            this.canvas.AutoScroll = true;
-            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(0, 0);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(300, 441);
-            this.canvas.TabIndex = 3;
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
             // 
-            // splitContainer1
+            // splitContainer.Panel1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer.Panel1MinSize = 380;
             // 
-            // splitContainer1.Panel1
+            // splitContainer.Panel2
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Panel1MinSize = 300;
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.canvas);
-            this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Panel2MinSize = 300;
-            this.splitContainer1.Size = new System.Drawing.Size(624, 441);
-            this.splitContainer1.SplitterDistance = 320;
-            this.splitContainer1.TabIndex = 2;
+            this.splitContainer.Panel2.Controls.Add(this.canvas);
+            this.splitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer.Panel2MinSize = 200;
+            this.splitContainer.Size = new System.Drawing.Size(624, 441);
+            this.splitContainer.SplitterDistance = 380;
+            this.splitContainer.TabIndex = 2;
+            this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer_SplitterMoved);
             // 
             // tableLayoutPanel1
             // 
@@ -166,7 +159,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(320, 441);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 441);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // sizeGroupBox
@@ -174,9 +167,9 @@
             this.sizeGroupBox.Controls.Add(this.resetSize);
             this.sizeGroupBox.Controls.Add(this.shapeSize);
             this.sizeGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sizeGroupBox.Location = new System.Drawing.Point(154, 468);
+            this.sizeGroupBox.Location = new System.Drawing.Point(184, 468);
             this.sizeGroupBox.Name = "sizeGroupBox";
-            this.sizeGroupBox.Size = new System.Drawing.Size(134, 224);
+            this.sizeGroupBox.Size = new System.Drawing.Size(164, 224);
             this.sizeGroupBox.TabIndex = 5;
             this.sizeGroupBox.TabStop = false;
             this.sizeGroupBox.Text = "Size";
@@ -184,7 +177,7 @@
             // resetSize
             // 
             this.resetSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetSize.Location = new System.Drawing.Point(24, 195);
+            this.resetSize.Location = new System.Drawing.Point(39, 195);
             this.resetSize.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetSize.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetSize.Name = "resetSize";
@@ -192,7 +185,7 @@
             this.resetSize.TabIndex = 10;
             this.resetSize.Text = "Reset";
             this.resetSize.UseVisualStyleBackColor = true;
-            this.resetSize.Click += new System.EventHandler(this.resetSize_Click);
+            this.resetSize.Click += new System.EventHandler(this.ResetSize_Click);
             // 
             // shapeSize
             // 
@@ -202,10 +195,9 @@
             this.shapeSize.Maximum = 100;
             this.shapeSize.Minimum = -100;
             this.shapeSize.Name = "shapeSize";
-            this.shapeSize.Size = new System.Drawing.Size(122, 45);
+            this.shapeSize.Size = new System.Drawing.Size(152, 45);
             this.shapeSize.TabIndex = 0;
             this.shapeSize.TickFrequency = 5;
-            this.shapeSize.ValueChanged += new System.EventHandler(this.shapeSize_ValueChanged);
             // 
             // rotationGroupBox
             // 
@@ -219,17 +211,43 @@
             this.rotationGroupBox.Controls.Add(this.label1);
             this.rotationGroupBox.Controls.Add(this.rotationX);
             this.rotationGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rotationGroupBox.Location = new System.Drawing.Point(154, 238);
+            this.rotationGroupBox.Location = new System.Drawing.Point(184, 238);
             this.rotationGroupBox.Name = "rotationGroupBox";
-            this.rotationGroupBox.Size = new System.Drawing.Size(134, 224);
+            this.rotationGroupBox.Size = new System.Drawing.Size(164, 224);
             this.rotationGroupBox.TabIndex = 4;
             this.rotationGroupBox.TabStop = false;
             this.rotationGroupBox.Text = "Rotation";
             // 
+            // eulerRotation
+            // 
+            this.eulerRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.eulerRotation.AutoSize = true;
+            this.eulerRotation.Checked = true;
+            this.eulerRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.eulerRotation.Location = new System.Drawing.Point(43, 19);
+            this.eulerRotation.Name = "eulerRotation";
+            this.eulerRotation.Size = new System.Drawing.Size(55, 20);
+            this.eulerRotation.TabIndex = 0;
+            this.eulerRotation.TabStop = true;
+            this.eulerRotation.Text = "euler";
+            this.eulerRotation.UseVisualStyleBackColor = true;
+            // 
+            // quaternionRotation
+            // 
+            this.quaternionRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.quaternionRotation.AutoSize = true;
+            this.quaternionRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.quaternionRotation.Location = new System.Drawing.Point(43, 37);
+            this.quaternionRotation.Name = "quaternionRotation";
+            this.quaternionRotation.Size = new System.Drawing.Size(88, 20);
+            this.quaternionRotation.TabIndex = 1;
+            this.quaternionRotation.Text = "quaternion";
+            this.quaternionRotation.UseVisualStyleBackColor = true;
+            // 
             // resetRotation
             // 
             this.resetRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetRotation.Location = new System.Drawing.Point(23, 195);
+            this.resetRotation.Location = new System.Drawing.Point(38, 195);
             this.resetRotation.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetRotation.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetRotation.Name = "resetRotation";
@@ -237,7 +255,7 @@
             this.resetRotation.TabIndex = 10;
             this.resetRotation.Text = "Reset";
             this.resetRotation.UseVisualStyleBackColor = true;
-            this.resetRotation.Click += new System.EventHandler(this.resetRotationButton_Click);
+            this.resetRotation.Click += new System.EventHandler(this.ResetRotationButton_Click);
             // 
             // label3
             // 
@@ -264,10 +282,10 @@
             this.rotationZ.Location = new System.Drawing.Point(27, 152);
             this.rotationZ.Maximum = 360;
             this.rotationZ.Name = "rotationZ";
-            this.rotationZ.Size = new System.Drawing.Size(101, 45);
+            this.rotationZ.Size = new System.Drawing.Size(131, 45);
             this.rotationZ.TabIndex = 4;
             this.rotationZ.TickFrequency = 5;
-            this.rotationZ.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
+            this.rotationZ.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
             // 
             // rotationY
             // 
@@ -276,10 +294,10 @@
             this.rotationY.Location = new System.Drawing.Point(27, 107);
             this.rotationY.Maximum = 360;
             this.rotationY.Name = "rotationY";
-            this.rotationY.Size = new System.Drawing.Size(101, 45);
+            this.rotationY.Size = new System.Drawing.Size(131, 45);
             this.rotationY.TabIndex = 3;
             this.rotationY.TickFrequency = 5;
-            this.rotationY.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
+            this.rotationY.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
             // 
             // label1
             // 
@@ -297,10 +315,10 @@
             this.rotationX.Location = new System.Drawing.Point(27, 63);
             this.rotationX.Maximum = 360;
             this.rotationX.Name = "rotationX";
-            this.rotationX.Size = new System.Drawing.Size(101, 45);
+            this.rotationX.Size = new System.Drawing.Size(131, 45);
             this.rotationX.TabIndex = 2;
             this.rotationX.TickFrequency = 5;
-            this.rotationX.ValueChanged += new System.EventHandler(this.rotation_ValueChanged);
+            this.rotationX.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
             // 
             // verticesColorGroupBox
             // 
@@ -316,7 +334,7 @@
             this.verticesColorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.verticesColorGroupBox.Location = new System.Drawing.Point(15, 468);
             this.verticesColorGroupBox.Name = "verticesColorGroupBox";
-            this.verticesColorGroupBox.Size = new System.Drawing.Size(133, 224);
+            this.verticesColorGroupBox.Size = new System.Drawing.Size(163, 224);
             this.verticesColorGroupBox.TabIndex = 2;
             this.verticesColorGroupBox.TabStop = false;
             this.verticesColorGroupBox.Text = "Vertices color";
@@ -324,7 +342,7 @@
             // resetVerticesColor
             // 
             this.resetVerticesColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetVerticesColor.Location = new System.Drawing.Point(31, 195);
+            this.resetVerticesColor.Location = new System.Drawing.Point(46, 195);
             this.resetVerticesColor.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetVerticesColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetVerticesColor.Name = "resetVerticesColor";
@@ -332,7 +350,7 @@
             this.resetVerticesColor.TabIndex = 10;
             this.resetVerticesColor.Text = "Reset";
             this.resetVerticesColor.UseVisualStyleBackColor = true;
-            this.resetVerticesColor.Click += new System.EventHandler(this.resetVerticesColor_Click);
+            this.resetVerticesColor.Click += new System.EventHandler(this.ResetVerticesColor_Click);
             // 
             // pictureBox12
             // 
@@ -377,10 +395,10 @@
             this.blueVertices.Location = new System.Drawing.Point(27, 108);
             this.blueVertices.Maximum = 255;
             this.blueVertices.Name = "blueVertices";
-            this.blueVertices.Size = new System.Drawing.Size(93, 45);
+            this.blueVertices.Size = new System.Drawing.Size(123, 45);
             this.blueVertices.TabIndex = 2;
             this.blueVertices.TickFrequency = 5;
-            this.blueVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
+            this.blueVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
             // 
             // greenVertices
             // 
@@ -389,10 +407,10 @@
             this.greenVertices.Location = new System.Drawing.Point(27, 63);
             this.greenVertices.Maximum = 255;
             this.greenVertices.Name = "greenVertices";
-            this.greenVertices.Size = new System.Drawing.Size(93, 45);
+            this.greenVertices.Size = new System.Drawing.Size(123, 45);
             this.greenVertices.TabIndex = 1;
             this.greenVertices.TickFrequency = 5;
-            this.greenVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
+            this.greenVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
             // 
             // alphaVertices
             // 
@@ -401,11 +419,11 @@
             this.alphaVertices.Location = new System.Drawing.Point(27, 153);
             this.alphaVertices.Maximum = 255;
             this.alphaVertices.Name = "alphaVertices";
-            this.alphaVertices.Size = new System.Drawing.Size(93, 45);
+            this.alphaVertices.Size = new System.Drawing.Size(123, 45);
             this.alphaVertices.TabIndex = 3;
             this.alphaVertices.TickFrequency = 5;
             this.alphaVertices.Value = 255;
-            this.alphaVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
+            this.alphaVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
             // 
             // redVertices
             // 
@@ -414,10 +432,10 @@
             this.redVertices.Location = new System.Drawing.Point(27, 19);
             this.redVertices.Maximum = 255;
             this.redVertices.Name = "redVertices";
-            this.redVertices.Size = new System.Drawing.Size(93, 45);
+            this.redVertices.Size = new System.Drawing.Size(123, 45);
             this.redVertices.TabIndex = 0;
             this.redVertices.TickFrequency = 5;
-            this.redVertices.Scroll += new System.EventHandler(this.verticesColor_Scroll);
+            this.redVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
             // 
             // optionsGroupBox
             // 
@@ -426,9 +444,9 @@
             this.optionsGroupBox.Controls.Add(this.verticesCheckBox);
             this.optionsGroupBox.Controls.Add(this.outlinesCheckBox);
             this.optionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.optionsGroupBox.Location = new System.Drawing.Point(154, 8);
+            this.optionsGroupBox.Location = new System.Drawing.Point(184, 8);
             this.optionsGroupBox.Name = "optionsGroupBox";
-            this.optionsGroupBox.Size = new System.Drawing.Size(134, 224);
+            this.optionsGroupBox.Size = new System.Drawing.Size(164, 224);
             this.optionsGroupBox.TabIndex = 3;
             this.optionsGroupBox.TabStop = false;
             this.optionsGroupBox.Text = "Options";
@@ -436,7 +454,7 @@
             // resetOptions
             // 
             this.resetOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetOptions.Location = new System.Drawing.Point(23, 196);
+            this.resetOptions.Location = new System.Drawing.Point(38, 196);
             this.resetOptions.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetOptions.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetOptions.Name = "resetOptions";
@@ -444,49 +462,52 @@
             this.resetOptions.TabIndex = 10;
             this.resetOptions.Text = "Reset";
             this.resetOptions.UseVisualStyleBackColor = true;
-            this.resetOptions.Click += new System.EventHandler(this.resetOptions_Click);
+            this.resetOptions.Click += new System.EventHandler(this.ResetOptions_Click);
             // 
             // fillCheckBox
             // 
+            this.fillCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.fillCheckBox.AutoSize = true;
             this.fillCheckBox.Checked = true;
             this.fillCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fillCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fillCheckBox.Location = new System.Drawing.Point(40, 133);
+            this.fillCheckBox.Location = new System.Drawing.Point(39, 132);
             this.fillCheckBox.Name = "fillCheckBox";
             this.fillCheckBox.Size = new System.Drawing.Size(40, 21);
             this.fillCheckBox.TabIndex = 2;
             this.fillCheckBox.Text = "fill";
             this.fillCheckBox.UseVisualStyleBackColor = true;
-            this.fillCheckBox.CheckedChanged += new System.EventHandler(this.fillCheckBox_CheckedChanged);
+            this.fillCheckBox.CheckedChanged += new System.EventHandler(this.FillCheckBox_CheckedChanged);
             // 
             // verticesCheckBox
             // 
+            this.verticesCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.verticesCheckBox.AutoSize = true;
             this.verticesCheckBox.Checked = true;
             this.verticesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.verticesCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.verticesCheckBox.Location = new System.Drawing.Point(40, 87);
+            this.verticesCheckBox.Location = new System.Drawing.Point(39, 97);
             this.verticesCheckBox.Name = "verticesCheckBox";
             this.verticesCheckBox.Size = new System.Drawing.Size(76, 21);
             this.verticesCheckBox.TabIndex = 1;
             this.verticesCheckBox.Text = "vertices";
             this.verticesCheckBox.UseVisualStyleBackColor = true;
-            this.verticesCheckBox.CheckedChanged += new System.EventHandler(this.verticesCheckBox_CheckedChanged);
+            this.verticesCheckBox.CheckedChanged += new System.EventHandler(this.VerticesCheckBox_CheckedChanged);
             // 
             // outlinesCheckBox
             // 
+            this.outlinesCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.outlinesCheckBox.AutoSize = true;
             this.outlinesCheckBox.Checked = true;
             this.outlinesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.outlinesCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.outlinesCheckBox.Location = new System.Drawing.Point(40, 43);
+            this.outlinesCheckBox.Location = new System.Drawing.Point(39, 61);
             this.outlinesCheckBox.Name = "outlinesCheckBox";
             this.outlinesCheckBox.Size = new System.Drawing.Size(76, 21);
             this.outlinesCheckBox.TabIndex = 0;
             this.outlinesCheckBox.Text = "outlines";
             this.outlinesCheckBox.UseVisualStyleBackColor = true;
-            this.outlinesCheckBox.CheckedChanged += new System.EventHandler(this.outlinesCheckBox_CheckedChanged);
+            this.outlinesCheckBox.CheckedChanged += new System.EventHandler(this.OutlinesCheckBox_CheckedChanged);
             // 
             // outlineColorGroupBox
             // 
@@ -502,7 +523,7 @@
             this.outlineColorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outlineColorGroupBox.Location = new System.Drawing.Point(15, 8);
             this.outlineColorGroupBox.Name = "outlineColorGroupBox";
-            this.outlineColorGroupBox.Size = new System.Drawing.Size(133, 224);
+            this.outlineColorGroupBox.Size = new System.Drawing.Size(163, 224);
             this.outlineColorGroupBox.TabIndex = 0;
             this.outlineColorGroupBox.TabStop = false;
             this.outlineColorGroupBox.Text = "Outline color";
@@ -510,7 +531,7 @@
             // resetOutlineColor
             // 
             this.resetOutlineColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetOutlineColor.Location = new System.Drawing.Point(31, 196);
+            this.resetOutlineColor.Location = new System.Drawing.Point(46, 196);
             this.resetOutlineColor.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetOutlineColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetOutlineColor.Name = "resetOutlineColor";
@@ -518,7 +539,7 @@
             this.resetOutlineColor.TabIndex = 10;
             this.resetOutlineColor.Text = "Reset";
             this.resetOutlineColor.UseVisualStyleBackColor = true;
-            this.resetOutlineColor.Click += new System.EventHandler(this.resetOutlineColor_Click);
+            this.resetOutlineColor.Click += new System.EventHandler(this.ResetOutlineColor_Click);
             // 
             // pictureBox10
             // 
@@ -563,11 +584,11 @@
             this.alphaOutline.Location = new System.Drawing.Point(27, 153);
             this.alphaOutline.Maximum = 255;
             this.alphaOutline.Name = "alphaOutline";
-            this.alphaOutline.Size = new System.Drawing.Size(93, 45);
+            this.alphaOutline.Size = new System.Drawing.Size(123, 45);
             this.alphaOutline.TabIndex = 3;
             this.alphaOutline.TickFrequency = 5;
             this.alphaOutline.Value = 255;
-            this.alphaOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
+            this.alphaOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
             // 
             // blueOutline
             // 
@@ -576,10 +597,10 @@
             this.blueOutline.Location = new System.Drawing.Point(27, 108);
             this.blueOutline.Maximum = 255;
             this.blueOutline.Name = "blueOutline";
-            this.blueOutline.Size = new System.Drawing.Size(93, 45);
+            this.blueOutline.Size = new System.Drawing.Size(123, 45);
             this.blueOutline.TabIndex = 2;
             this.blueOutline.TickFrequency = 5;
-            this.blueOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
+            this.blueOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
             // 
             // greenOutline
             // 
@@ -588,10 +609,10 @@
             this.greenOutline.Location = new System.Drawing.Point(27, 63);
             this.greenOutline.Maximum = 255;
             this.greenOutline.Name = "greenOutline";
-            this.greenOutline.Size = new System.Drawing.Size(93, 45);
+            this.greenOutline.Size = new System.Drawing.Size(123, 45);
             this.greenOutline.TabIndex = 1;
             this.greenOutline.TickFrequency = 5;
-            this.greenOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
+            this.greenOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
             // 
             // redOutline
             // 
@@ -600,10 +621,10 @@
             this.redOutline.Location = new System.Drawing.Point(27, 19);
             this.redOutline.Maximum = 255;
             this.redOutline.Name = "redOutline";
-            this.redOutline.Size = new System.Drawing.Size(93, 45);
+            this.redOutline.Size = new System.Drawing.Size(123, 45);
             this.redOutline.TabIndex = 0;
             this.redOutline.TickFrequency = 5;
-            this.redOutline.Scroll += new System.EventHandler(this.outlineColor_Scroll);
+            this.redOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
             // 
             // fillColorGroupBox
             // 
@@ -619,7 +640,7 @@
             this.fillColorGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fillColorGroupBox.Location = new System.Drawing.Point(15, 238);
             this.fillColorGroupBox.Name = "fillColorGroupBox";
-            this.fillColorGroupBox.Size = new System.Drawing.Size(133, 224);
+            this.fillColorGroupBox.Size = new System.Drawing.Size(163, 224);
             this.fillColorGroupBox.TabIndex = 1;
             this.fillColorGroupBox.TabStop = false;
             this.fillColorGroupBox.Text = "Fill color";
@@ -627,7 +648,7 @@
             // resetFillColor
             // 
             this.resetFillColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.resetFillColor.Location = new System.Drawing.Point(31, 195);
+            this.resetFillColor.Location = new System.Drawing.Point(46, 195);
             this.resetFillColor.MaximumSize = new System.Drawing.Size(200, 23);
             this.resetFillColor.MinimumSize = new System.Drawing.Size(75, 23);
             this.resetFillColor.Name = "resetFillColor";
@@ -635,7 +656,7 @@
             this.resetFillColor.TabIndex = 10;
             this.resetFillColor.Text = "Reset";
             this.resetFillColor.UseVisualStyleBackColor = true;
-            this.resetFillColor.Click += new System.EventHandler(this.resetFillColor_Click);
+            this.resetFillColor.Click += new System.EventHandler(this.ResetFillColor_Click);
             // 
             // pictureBox11
             // 
@@ -680,10 +701,10 @@
             this.blueFill.Location = new System.Drawing.Point(27, 108);
             this.blueFill.Maximum = 255;
             this.blueFill.Name = "blueFill";
-            this.blueFill.Size = new System.Drawing.Size(93, 45);
+            this.blueFill.Size = new System.Drawing.Size(123, 45);
             this.blueFill.TabIndex = 2;
             this.blueFill.TickFrequency = 5;
-            this.blueFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
+            this.blueFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // alphaFill
             // 
@@ -692,11 +713,11 @@
             this.alphaFill.Location = new System.Drawing.Point(27, 153);
             this.alphaFill.Maximum = 255;
             this.alphaFill.Name = "alphaFill";
-            this.alphaFill.Size = new System.Drawing.Size(93, 45);
+            this.alphaFill.Size = new System.Drawing.Size(123, 45);
             this.alphaFill.TabIndex = 3;
             this.alphaFill.TickFrequency = 5;
             this.alphaFill.Value = 255;
-            this.alphaFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
+            this.alphaFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // greenFill
             // 
@@ -705,10 +726,10 @@
             this.greenFill.Location = new System.Drawing.Point(27, 63);
             this.greenFill.Maximum = 255;
             this.greenFill.Name = "greenFill";
-            this.greenFill.Size = new System.Drawing.Size(93, 45);
+            this.greenFill.Size = new System.Drawing.Size(123, 45);
             this.greenFill.TabIndex = 1;
             this.greenFill.TickFrequency = 5;
-            this.greenFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
+            this.greenFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // redFill
             // 
@@ -717,52 +738,35 @@
             this.redFill.Location = new System.Drawing.Point(27, 19);
             this.redFill.Maximum = 255;
             this.redFill.Name = "redFill";
-            this.redFill.Size = new System.Drawing.Size(93, 45);
+            this.redFill.Size = new System.Drawing.Size(123, 45);
             this.redFill.TabIndex = 0;
             this.redFill.TickFrequency = 5;
-            this.redFill.Scroll += new System.EventHandler(this.fillColor_Scroll);
+            this.redFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
-            // quaternionRotation
+            // canvas
             // 
-            this.quaternionRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.quaternionRotation.AutoSize = true;
-            this.quaternionRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.quaternionRotation.Location = new System.Drawing.Point(28, 37);
-            this.quaternionRotation.Name = "quaternionRotation";
-            this.quaternionRotation.Size = new System.Drawing.Size(88, 20);
-            this.quaternionRotation.TabIndex = 1;
-            this.quaternionRotation.Text = "quaternion";
-            this.quaternionRotation.UseVisualStyleBackColor = true;
-            // 
-            // eulerRotation
-            // 
-            this.eulerRotation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.eulerRotation.AutoSize = true;
-            this.eulerRotation.Checked = true;
-            this.eulerRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.eulerRotation.Location = new System.Drawing.Point(28, 19);
-            this.eulerRotation.Name = "eulerRotation";
-            this.eulerRotation.Size = new System.Drawing.Size(55, 20);
-            this.eulerRotation.TabIndex = 0;
-            this.eulerRotation.TabStop = true;
-            this.eulerRotation.Text = "euler";
-            this.eulerRotation.UseVisualStyleBackColor = true;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(0, 0);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(240, 441);
+            this.canvas.TabIndex = 0;
+            this.canvas.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainer);
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "MainForm";
             this.Text = "Tesseract";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.sizeGroupBox.ResumeLayout(false);
             this.sizeGroupBox.PerformLayout();
@@ -804,13 +808,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.alphaFill)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenFill)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.redFill)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel canvas;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox sizeGroupBox;
         private System.Windows.Forms.Button resetSize;
@@ -860,6 +864,7 @@
         private System.Windows.Forms.TrackBar alphaVertices;
         private System.Windows.Forms.RadioButton eulerRotation;
         private System.Windows.Forms.RadioButton quaternionRotation;
+        private System.Windows.Forms.PictureBox canvas;
     }
 }
 

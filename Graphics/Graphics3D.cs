@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Graphics
@@ -10,77 +9,59 @@ namespace Graphics
     {
         public event PaintEventHandler Paint;
 
-        public Control Control { get; }
-
-        private Pen _pen;
-        private Projection _projection;
-        private System.Drawing.Graphics _graphics;
+        public Pen Pen { get; }
+        public PictureBox Canvas { get; }
+        public Renderer Renderer { get; }
 
         private Matrix4x4 _localTransform;
         private Matrix4x4 _globalTransform;
         private Stack<Matrix4x4> _transformations;
 
-        public Graphics3D(Control control)
+        public Graphics3D(PictureBox canvas)
         {
-            Control = control;
-            _pen = new Pen(Color.Black);
-            _projection = new Projection(SizeF.Empty);
+            Canvas = canvas;
+            Renderer = new Renderer(Canvas);
+            Pen = new Pen(Color.Black);
 
             _localTransform = Matrix4x4.Identity;
             _globalTransform = Matrix4x4.Identity;
             _transformations = new Stack<Matrix4x4>();
 
-            Paint += OnPaint;
-            Control.Paint += control_Paint;
-        }
-
-        public void SetDoubleBuffered(bool enabled)
-        {
-            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
-                | BindingFlags.Instance | BindingFlags.NonPublic, null,
-                Control, new object[] { enabled });
-        }
-
-        public void Invalidate()
-        {
-            Control.Invalidate();
+            Canvas.Paint += Control_Paint;
         }
 
         public void SetColor(Color color)
         {
-            _pen.Color = color;
+            Pen.Color = color;
         }
 
-        public void FillPolygon(Vector3[] points)
+        public void FillTriangle(Vector3 a, Vector3 b, Vector3 c)
         {
-            PointF[] pointsF = new PointF[points.Length];
+            a = ProjectVector(a);
+            b = ProjectVector(b);
+            c = ProjectVector(c);
 
-            for (int i = 0; i < points.Length; i++)
-            {
-                pointsF[i] = ProjectVector(points[i]);
-            }
-
-            _graphics.FillPolygon(_pen.Brush, pointsF);
+            Renderer.Rasterizer.FillTriangle(a, b, c, Pen.Color);
         }
 
         public void DrawLine(Vector3 point1, Vector3 point2)
         {
-            PointF pointF1 = ProjectVector(point1);
-            PointF pointF2 = ProjectVector(point2);
+            point1 = ProjectVector(point1);
+            point2 = ProjectVector(point2);
 
-            _graphics.DrawLine(_pen, pointF1, pointF2);
+            Renderer.Rasterizer.DrawLine(point1, point2, Pen.Color);
         }
 
         public void DrawCircle(Vector3 point, float size)
         {
-            PointF pointF = PointF.Subtract(ProjectVector(point), new SizeF(size / 2.0f, size / 2.0f));
+            point = ProjectVector(point);
 
-            _graphics.FillEllipse(_pen.Brush, pointF.X, pointF.Y, size, size);
+            Renderer.Rasterizer.DrawCircle(point, size, Pen.Color);
         }
 
-        public void Clear(Color color)
+        public void Clear()
         {
-            _graphics.Clear(color);
+            Renderer.Clear();
         }
 
         public void Scale(Vector3 scale)
@@ -119,21 +100,26 @@ namespace Graphics
             _localTransform = _transformations.Pop();
         }
 
-        private PointF ProjectVector(Vector3 point)
+        public void Resize()
+        {
+            Canvas.Image = null;
+
+            Renderer.Resize(Canvas.Size);
+        }
+
+        private Vector3 ProjectVector(Vector3 point)
         {
             point = Vector3.Transform(point, _localTransform * _globalTransform);
-            return _projection.OrthographicProjection(point);
+            return Renderer.Projection.OrthographicProjection(point);
         }
 
-        private void control_Paint(object sender, PaintEventArgs e)
+        private void Control_Paint(object sender, PaintEventArgs e)
         {
-            Paint?.Invoke(sender, e);
-        }
+            Paint?.Invoke(sender, new PaintEventArgs(Renderer.DirectBitmap.Graphics, e.ClipRectangle));
 
-        private void OnPaint(object sender, PaintEventArgs e)
-        {
-            _graphics = e.Graphics;
-            _projection.SetBounds(_graphics.VisibleClipBounds.Size);
+            Renderer.Prerender();
+
+            Canvas.Image = Renderer.DirectBitmap.Bitmap;
         }
     }
 }

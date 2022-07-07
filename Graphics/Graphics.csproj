@@ -44,6 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buffers\AlphaBuffer.cs" />
+    <Compile Include="Buffers\PixelInfo.cs" />
+    <Compile Include="Buffers\ScreenBuffer.cs" />
+    <Compile Include="Contracts\IScreenBuffer.cs" />
+    <Compile Include="Buffers\DirectBitmap.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Rasterizer.cs" />
+    <Compile Include="Renderer.cs" />
+    <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Graphics3D.cs" />
     <Compile Include="Contracts\IDrawable.cs" />
     <Compile Include="Primitives\Cube.cs" />
@@ -55,6 +64,8 @@
     <Compile Include="Primitives\Quad.cs" />
     <Compile Include="Transformation.cs" />
     <Compile Include="Utils\Converter.cs" />
+    <Compile Include="Buffers\ZBuffer.cs" />
+    <Compile Include="Utils\MathEx.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

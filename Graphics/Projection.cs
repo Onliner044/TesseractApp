@@ -9,21 +9,20 @@ namespace Graphics
 
         public Projection(SizeF size)
         {
-            SetBounds(size);
+            Resize(size);
         }
 
-        internal void SetBounds(SizeF size)
+        public void Resize(SizeF size)
         {
             _halfBoundSize = new SizeF(size.Width / 2, size.Height / 2);
         }
 
-        internal PointF OrthographicProjection(Vector3 vector)
+        public Vector3 OrthographicProjection(Vector3 vector)
         {
-            PointF point = new PointF();
-            point.X = vector.X + _halfBoundSize.Width;
-            point.Y = -vector.Y + _halfBoundSize.Height;
+            vector.X = vector.X + _halfBoundSize.Width;
+            vector.Y = -vector.Y + _halfBoundSize.Height;
 
-            return point;
+            return vector;
         }
     }
 }

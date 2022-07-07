@@ -21,12 +21,14 @@ namespace TesseractApp
             InitializeComponent();
 
             _graphics3D = new Graphics3D(canvas);
-            _graphics3D.SetDoubleBuffered(true);
+            _graphics3D.Renderer.SetZBuffer(true);
+            _graphics3D.Renderer.SetDoubleBuffered(true);
+            _graphics3D.Renderer.SetBackgroundColor(Color.White);
 
-            _graphics3D.Paint += graphics3D_Paint;
-            _graphics3D.Control.MouseWheel += graphics3D_Control_MouseWheel;
-            _graphics3D.Control.MouseDown += graphics3D_Control_MouseDown;
-            _graphics3D.Control.MouseMove += graphics3D_Control_MouseMove;
+            _graphics3D.Paint += Graphics3D_Paint;
+            _graphics3D.Canvas.MouseWheel += Graphics3D_Control_MouseWheel;
+            _graphics3D.Canvas.MouseDown += Graphics3D_Control_MouseDown;
+            _graphics3D.Canvas.MouseMove += Graphics3D_Control_MouseMove;
 
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
@@ -52,25 +54,25 @@ namespace TesseractApp
             if (e.Control)
             {
                 _isControlKeyDown = true;
-                
+
                 _lastMouseClickLocation = _mouseLocation;
                 _lastMouseClickLocation.X += rotationZ.Value;
                 _lastMouseClickLocation.Y -= rotationX.Value;
             }
         }
 
-        private void graphics3D_Paint(object sender, PaintEventArgs e)
+        private void Graphics3D_Paint(object sender, PaintEventArgs e)
         {
             _tesseract.Transform.Scaling = Vector3.One * canvas.Height / 2.0f * (1.0f + shapeSize.Value / (float)shapeSize.Maximum);
 
-            _graphics3D.Clear(Color.White);
+            _graphics3D.Clear();
 
             _graphics3D.PushTransform();
             _tesseract.Draw(_graphics3D);
             _graphics3D.PopTransform();
         }
 
-        private void graphics3D_Control_MouseWheel(object sender, MouseEventArgs e)
+        private void Graphics3D_Control_MouseWheel(object sender, MouseEventArgs e)
         {
             int deltaScroll = Math.Abs(e.Delta) / e.Delta * shapeSize.TickFrequency;
 
@@ -78,7 +80,7 @@ namespace TesseractApp
             {
                 deltaScroll = shapeSize.Maximum - shapeSize.Value;
             }
-            else if (shapeSize.Value + deltaScroll < shapeSize.Minimum) 
+            else if (shapeSize.Value + deltaScroll < shapeSize.Minimum)
             {
                 deltaScroll = shapeSize.Minimum - shapeSize.Value;
             }
@@ -86,7 +88,7 @@ namespace TesseractApp
             shapeSize.Value += deltaScroll;
         }
 
-        private void graphics3D_Control_MouseDown(object sender, MouseEventArgs e)
+        private void Graphics3D_Control_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -104,7 +106,7 @@ namespace TesseractApp
             }
         }
 
-        private void graphics3D_Control_MouseMove(object sender, MouseEventArgs e)
+        private void Graphics3D_Control_MouseMove(object sender, MouseEventArgs e)
         {
             _mouseLocation = e.Location;
 
@@ -118,42 +120,36 @@ namespace TesseractApp
                 rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
                 rotationZ.Value = (360 + (_lastMouseClickLocation.X - e.X) % 360) % 360;
             }
-            else 
-            { 
+            else
+            {
                 rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
                 rotationY.Value = (360 + (e.X - _lastMouseClickLocation.X) % 360) % 360;
             }
         }
 
-        private void outlineColor_Scroll(object sender, EventArgs e)
+        private void OutlineColor_Scroll(object sender, EventArgs e)
         {
             _tesseract.OutlineColor = Color.FromArgb(alphaOutline.Value, redOutline.Value, greenOutline.Value, blueOutline.Value);
-
-            _graphics3D.Invalidate();
         }
 
-        private void fillColor_Scroll(object sender, EventArgs e)
+        private void FillColor_Scroll(object sender, EventArgs e)
         {
             _tesseract.FillColor = Color.FromArgb(alphaFill.Value, redFill.Value, greenFill.Value, blueFill.Value);
-
-            _graphics3D.Invalidate();
         }
 
-        private void verticesColor_Scroll(object sender, EventArgs e)
+        private void VerticesColor_Scroll(object sender, EventArgs e)
         {
             _tesseract.VerticesColor = Color.FromArgb(alphaVertices.Value, redVertices.Value, greenVertices.Value, blueVertices.Value);
-
-            _graphics3D.Invalidate();
         }
 
-        private void rotation_ValueChanged(object sender, EventArgs e)
+        private void Rotation_ValueChanged(object sender, EventArgs e)
         {
             float x = Converter.DegToRad(rotationX.Value);
             float y = Converter.DegToRad(rotationY.Value);
             float z = Converter.DegToRad(rotationZ.Value);
 
-            if (eulerRotation.Checked) 
-            { 
+            if (eulerRotation.Checked)
+            {
                 _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, x);
                 _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
                 _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
@@ -162,34 +158,24 @@ namespace TesseractApp
             {
                 _tesseract.Transform.Rotation = Quaternion.CreateFromYawPitchRoll(y, x, z);
             }
-
-            _graphics3D.Invalidate();
         }
 
-        private void shapeSize_ValueChanged(object sender, EventArgs e)
-        {
-            _graphics3D.Invalidate();
-        }
-
-        private void outlinesCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void OutlinesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _tesseract.HasOutline = outlinesCheckBox.Checked;
-            _graphics3D.Invalidate();
         }
 
-        private void verticesCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void VerticesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _tesseract.HasVertices = verticesCheckBox.Checked;
-            _graphics3D.Invalidate();
         }
 
-        private void fillCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void FillCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _tesseract.InnerCube.HasFill = fillCheckBox.Checked;
-            _graphics3D.Invalidate();
         }
 
-        private void resetOutlineColor_Click(object sender, EventArgs e)
+        private void ResetOutlineColor_Click(object sender, EventArgs e)
         {
             _tesseract.OutlineColor = Color.Black;
 
@@ -197,11 +183,9 @@ namespace TesseractApp
             greenOutline.Value = 0;
             blueOutline.Value = 0;
             alphaOutline.Value = 255;
-
-            _graphics3D.Invalidate();
         }
 
-        private void resetFillColor_Click(object sender, EventArgs e)
+        private void ResetFillColor_Click(object sender, EventArgs e)
         {
             _tesseract.FillColor = Color.Black;
 
@@ -209,11 +193,9 @@ namespace TesseractApp
             greenFill.Value = 0;
             blueFill.Value = 0;
             alphaFill.Value = 255;
-
-            _graphics3D.Invalidate();
         }
 
-        private void resetVerticesColor_Click(object sender, EventArgs e)
+        private void ResetVerticesColor_Click(object sender, EventArgs e)
         {
             _tesseract.VerticesColor = Color.Black;
 
@@ -221,30 +203,24 @@ namespace TesseractApp
             greenVertices.Value = 0;
             blueVertices.Value = 0;
             alphaVertices.Value = 255;
-
-            _graphics3D.Invalidate();
         }
 
-        private void resetRotationButton_Click(object sender, EventArgs e)
+        private void ResetRotationButton_Click(object sender, EventArgs e)
         {
             _tesseract.Transform.Rotation = Quaternion.Identity;
 
             rotationX.Value = 0;
             rotationY.Value = 0;
             rotationZ.Value = 0;
-
-            _graphics3D.Invalidate();
         }
 
-        private void resetSize_Click(object sender, EventArgs e)
+        private void ResetSize_Click(object sender, EventArgs e)
         {
             shapeSize.Value = 0;
             _tesseract.Transform.Scaling = Vector3.One;
-
-            _graphics3D.Invalidate();
         }
 
-        private void resetOptions_Click(object sender, EventArgs e)
+        private void ResetOptions_Click(object sender, EventArgs e)
         {
             verticesCheckBox.Checked = true;
             outlinesCheckBox.Checked = true;
@@ -253,7 +229,12 @@ namespace TesseractApp
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            _graphics3D.Invalidate();
+            _graphics3D.Resize();
+        }
+
+        private void SplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            _graphics3D.Resize();
         }
     }
 }

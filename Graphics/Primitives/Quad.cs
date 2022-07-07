@@ -33,6 +33,13 @@ namespace Graphics.Primitives
         {
             base.Draw(graphics);
 
+            if (HasFill)
+            {
+                graphics.SetColor(FillColor);
+                graphics.FillTriangle(Vector3.Zero, Vector3.One - Vector3.UnitZ, Vector3.UnitY);
+                graphics.FillTriangle(Vector3.Zero, Vector3.UnitX, Vector3.One - Vector3.UnitZ);
+            }
+
             if (HasOutline)
             {
                 graphics.SetColor(OutlineColor);
@@ -60,18 +67,6 @@ namespace Graphics.Primitives
                     graphics.DrawCircle(_line.Point2, VerticesSize);
                 }
                 graphics.PopTransform();
-            }
-
-            if (HasFill)
-            {
-                graphics.SetColor(FillColor);
-                graphics.FillPolygon(new Vector3[]
-                {
-                    Vector3.Zero,
-                    Vector3.UnitY,
-                    Vector3.One - Vector3.UnitZ,
-                    Vector3.UnitX,
-                });
             }
         }
     }

@@ -96,11 +96,14 @@ namespace Graphics.Primitives
         {
             base.Draw(graphics);
 
-            _outlinedQuad.Draw(graphics);
-
             graphics.PushTransform();
-            graphics.Translate(Vector3.UnitZ * EdgeLength);
-            _outlinedQuad.Draw(graphics);
+            graphics.Rotation(Vector3.UnitY, Converter.DegToRad(90.0f));
+            graphics.Translate(Vector3.UnitZ);
+            _filledQuad.Draw(graphics);
+            graphics.Translate(-Vector3.UnitZ);
+            graphics.Rotation(Vector3.UnitY, Converter.DegToRad(180.0f));
+            graphics.Translate(Vector3.UnitX);
+            _filledQuad.Draw(graphics);
             graphics.PopTransform();
 
             graphics.PushTransform();
@@ -112,12 +115,11 @@ namespace Graphics.Primitives
             }
             graphics.PopTransform();
 
+            _outlinedQuad.Draw(graphics);
+
             graphics.PushTransform();
-            graphics.Rotation(Vector3.UnitY, Converter.DegToRad(90.0f));
-            graphics.Translate(Vector3.UnitZ);
-            _filledQuad.Draw(graphics);
-            graphics.Translate(Vector3.UnitX);
-            _filledQuad.Draw(graphics);
+            graphics.Translate(Vector3.UnitZ * EdgeLength);
+            _outlinedQuad.Draw(graphics);
             graphics.PopTransform();
 
             if (HasOutline)
