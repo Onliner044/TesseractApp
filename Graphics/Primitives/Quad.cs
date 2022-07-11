@@ -64,7 +64,6 @@ namespace Graphics.Primitives
                     graphics.Rotation(Vector3.UnitZ, Converter.DegToRad(90.0f));
                     graphics.Translate(Vector3.UnitX * EdgeLength);
                     graphics.DrawCircle(_line.Point1, VerticesSize);
-                    graphics.DrawCircle(_line.Point2, VerticesSize);
                 }
                 graphics.PopTransform();
             }
