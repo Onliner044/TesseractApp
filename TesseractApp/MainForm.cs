@@ -70,7 +70,18 @@ namespace TesseractApp
 
         private void Graphics3D_Paint(object sender, PaintEventArgs e)
         {
-            _tesseract.Transform.Scaling = Vector3.One * canvas.Height / 2.0f * (1.0f + shapeSize.Value / (float)shapeSize.Maximum);
+            int screenSize;
+
+            if (canvas.Width < canvas.Height)
+            {
+                screenSize = canvas.Width;
+            }
+            else
+            {
+                screenSize = canvas.Height;
+            }
+
+            _tesseract.Transform.Scaling = Vector3.One * screenSize / 2.0f * (1.0f + shapeSize.Value / (float)shapeSize.Maximum);
 
             _graphics3D.Clear();
 

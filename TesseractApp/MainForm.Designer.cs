@@ -190,6 +190,8 @@
             // 
             this.autoRotationX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.autoRotationX.AutoSize = true;
+            this.autoRotationX.Checked = true;
+            this.autoRotationX.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoRotationX.Location = new System.Drawing.Point(81, 60);
             this.autoRotationX.Name = "autoRotationX";
             this.autoRotationX.Size = new System.Drawing.Size(15, 14);
@@ -200,6 +202,8 @@
             // 
             this.autoRotationY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.autoRotationY.AutoSize = true;
+            this.autoRotationY.Checked = true;
+            this.autoRotationY.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoRotationY.Location = new System.Drawing.Point(135, 60);
             this.autoRotationY.Name = "autoRotationY";
             this.autoRotationY.Size = new System.Drawing.Size(15, 14);
@@ -902,7 +906,9 @@
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(840, 480);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tesseract";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
