@@ -25,6 +25,16 @@
         private void InitializeComponent() {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.autoRotationZ = new System.Windows.Forms.CheckBox();
+            this.autoRotationX = new System.Windows.Forms.CheckBox();
+            this.autoRotationY = new System.Windows.Forms.CheckBox();
+            this.autoRotationButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.rotationSpeed = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.sizeGroupBox = new System.Windows.Forms.GroupBox();
             this.resetSize = new System.Windows.Forms.Button();
             this.shapeSize = new System.Windows.Forms.TrackBar();
@@ -79,6 +89,8 @@
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationSpeed)).BeginInit();
             this.sizeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shapeSize)).BeginInit();
             this.rotationGroupBox.SuspendLayout();
@@ -132,8 +144,8 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.canvas);
             this.splitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer.Panel2MinSize = 200;
-            this.splitContainer.Size = new System.Drawing.Size(624, 441);
+            this.splitContainer.Panel2MinSize = 260;
+            this.splitContainer.Size = new System.Drawing.Size(824, 441);
             this.splitContainer.SplitterDistance = 380;
             this.splitContainer.TabIndex = 2;
             this.splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SplitContainer_SplitterMoved);
@@ -144,6 +156,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.sizeGroupBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.rotationGroupBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.verticesColorGroupBox, 0, 2);
@@ -154,13 +167,122 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(12, 5, 12, 5);
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 441);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 2);
+            this.groupBox1.Controls.Add(this.autoRotationZ);
+            this.groupBox1.Controls.Add(this.autoRotationX);
+            this.groupBox1.Controls.Add(this.autoRotationY);
+            this.groupBox1.Controls.Add(this.autoRotationButton);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.rotationSpeed);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(15, 698);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(333, 224);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Auto rotation";
+            // 
+            // autoRotationZ
+            // 
+            this.autoRotationZ.AutoSize = true;
+            this.autoRotationZ.Location = new System.Drawing.Point(165, 165);
+            this.autoRotationZ.Name = "autoRotationZ";
+            this.autoRotationZ.Size = new System.Drawing.Size(15, 14);
+            this.autoRotationZ.TabIndex = 11;
+            this.autoRotationZ.UseVisualStyleBackColor = true;
+            // 
+            // autoRotationX
+            // 
+            this.autoRotationX.AutoSize = true;
+            this.autoRotationX.Location = new System.Drawing.Point(165, 76);
+            this.autoRotationX.Name = "autoRotationX";
+            this.autoRotationX.Size = new System.Drawing.Size(15, 14);
+            this.autoRotationX.TabIndex = 11;
+            this.autoRotationX.UseVisualStyleBackColor = true;
+            // 
+            // autoRotationY
+            // 
+            this.autoRotationY.AutoSize = true;
+            this.autoRotationY.Location = new System.Drawing.Point(165, 120);
+            this.autoRotationY.Name = "autoRotationY";
+            this.autoRotationY.Size = new System.Drawing.Size(15, 14);
+            this.autoRotationY.TabIndex = 11;
+            this.autoRotationY.UseVisualStyleBackColor = true;
+            // 
+            // autoRotationButton
+            // 
+            this.autoRotationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.autoRotationButton.Location = new System.Drawing.Point(122, 195);
+            this.autoRotationButton.MaximumSize = new System.Drawing.Size(200, 23);
+            this.autoRotationButton.MinimumSize = new System.Drawing.Size(75, 23);
+            this.autoRotationButton.Name = "autoRotationButton";
+            this.autoRotationButton.Size = new System.Drawing.Size(75, 23);
+            this.autoRotationButton.TabIndex = 10;
+            this.autoRotationButton.Text = "Rotate";
+            this.autoRotationButton.UseVisualStyleBackColor = true;
+            this.autoRotationButton.Click += new System.EventHandler(this.AutoRotationButton_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "speed";
+            // 
+            // rotationSpeed
+            // 
+            this.rotationSpeed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rotationSpeed.Location = new System.Drawing.Point(51, 19);
+            this.rotationSpeed.Maximum = 5;
+            this.rotationSpeed.Name = "rotationSpeed";
+            this.rotationSpeed.Size = new System.Drawing.Size(276, 45);
+            this.rotationSpeed.TabIndex = 2;
+            this.rotationSpeed.TickFrequency = 5;
+            this.rotationSpeed.Value = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(147, 166);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(12, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "z";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(147, 76);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(12, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "x";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(147, 120);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "y";
             // 
             // sizeGroupBox
             // 
@@ -285,7 +407,7 @@
             this.rotationZ.Size = new System.Drawing.Size(131, 45);
             this.rotationZ.TabIndex = 4;
             this.rotationZ.TickFrequency = 5;
-            this.rotationZ.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
+            this.rotationZ.Scroll += new System.EventHandler(this.Rotation_Scroll);
             // 
             // rotationY
             // 
@@ -297,7 +419,7 @@
             this.rotationY.Size = new System.Drawing.Size(131, 45);
             this.rotationY.TabIndex = 3;
             this.rotationY.TickFrequency = 5;
-            this.rotationY.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
+            this.rotationY.Scroll += new System.EventHandler(this.Rotation_Scroll);
             // 
             // label1
             // 
@@ -318,7 +440,7 @@
             this.rotationX.Size = new System.Drawing.Size(131, 45);
             this.rotationX.TabIndex = 2;
             this.rotationX.TickFrequency = 5;
-            this.rotationX.ValueChanged += new System.EventHandler(this.Rotation_ValueChanged);
+            this.rotationX.Scroll += new System.EventHandler(this.Rotation_Scroll);
             // 
             // verticesColorGroupBox
             // 
@@ -398,7 +520,7 @@
             this.blueVertices.Size = new System.Drawing.Size(123, 45);
             this.blueVertices.TabIndex = 2;
             this.blueVertices.TickFrequency = 5;
-            this.blueVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
+            this.blueVertices.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // greenVertices
             // 
@@ -410,7 +532,7 @@
             this.greenVertices.Size = new System.Drawing.Size(123, 45);
             this.greenVertices.TabIndex = 1;
             this.greenVertices.TickFrequency = 5;
-            this.greenVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
+            this.greenVertices.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // alphaVertices
             // 
@@ -422,8 +544,8 @@
             this.alphaVertices.Size = new System.Drawing.Size(123, 45);
             this.alphaVertices.TabIndex = 3;
             this.alphaVertices.TickFrequency = 5;
-            this.alphaVertices.Value = 255;
-            this.alphaVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
+            this.alphaVertices.Value = 128;
+            this.alphaVertices.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // redVertices
             // 
@@ -435,7 +557,7 @@
             this.redVertices.Size = new System.Drawing.Size(123, 45);
             this.redVertices.TabIndex = 0;
             this.redVertices.TickFrequency = 5;
-            this.redVertices.Scroll += new System.EventHandler(this.VerticesColor_Scroll);
+            this.redVertices.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // optionsGroupBox
             // 
@@ -587,8 +709,8 @@
             this.alphaOutline.Size = new System.Drawing.Size(123, 45);
             this.alphaOutline.TabIndex = 3;
             this.alphaOutline.TickFrequency = 5;
-            this.alphaOutline.Value = 255;
-            this.alphaOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
+            this.alphaOutline.Value = 128;
+            this.alphaOutline.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // blueOutline
             // 
@@ -600,7 +722,7 @@
             this.blueOutline.Size = new System.Drawing.Size(123, 45);
             this.blueOutline.TabIndex = 2;
             this.blueOutline.TickFrequency = 5;
-            this.blueOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
+            this.blueOutline.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // greenOutline
             // 
@@ -612,7 +734,7 @@
             this.greenOutline.Size = new System.Drawing.Size(123, 45);
             this.greenOutline.TabIndex = 1;
             this.greenOutline.TickFrequency = 5;
-            this.greenOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
+            this.greenOutline.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // redOutline
             // 
@@ -624,7 +746,7 @@
             this.redOutline.Size = new System.Drawing.Size(123, 45);
             this.redOutline.TabIndex = 0;
             this.redOutline.TickFrequency = 5;
-            this.redOutline.Scroll += new System.EventHandler(this.OutlineColor_Scroll);
+            this.redOutline.Scroll += new System.EventHandler(this.Color_Scroll);
             // 
             // fillColorGroupBox
             // 
@@ -704,7 +826,6 @@
             this.blueFill.Size = new System.Drawing.Size(123, 45);
             this.blueFill.TabIndex = 2;
             this.blueFill.TickFrequency = 5;
-            this.blueFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // alphaFill
             // 
@@ -716,8 +837,7 @@
             this.alphaFill.Size = new System.Drawing.Size(123, 45);
             this.alphaFill.TabIndex = 3;
             this.alphaFill.TickFrequency = 5;
-            this.alphaFill.Value = 255;
-            this.alphaFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
+            this.alphaFill.Value = 128;
             // 
             // greenFill
             // 
@@ -729,7 +849,6 @@
             this.greenFill.Size = new System.Drawing.Size(123, 45);
             this.greenFill.TabIndex = 1;
             this.greenFill.TickFrequency = 5;
-            this.greenFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // redFill
             // 
@@ -741,14 +860,13 @@
             this.redFill.Size = new System.Drawing.Size(123, 45);
             this.redFill.TabIndex = 0;
             this.redFill.TickFrequency = 5;
-            this.redFill.Scroll += new System.EventHandler(this.FillColor_Scroll);
             // 
             // canvas
             // 
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(240, 441);
+            this.canvas.Size = new System.Drawing.Size(440, 441);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             // 
@@ -756,10 +874,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 441);
+            this.ClientSize = new System.Drawing.Size(824, 441);
             this.Controls.Add(this.splitContainer);
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(640, 480);
+            this.MinimumSize = new System.Drawing.Size(840, 480);
             this.Name = "MainForm";
             this.Text = "Tesseract";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
@@ -768,6 +886,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rotationSpeed)).EndInit();
             this.sizeGroupBox.ResumeLayout(false);
             this.sizeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shapeSize)).EndInit();
@@ -865,6 +986,16 @@
         private System.Windows.Forms.RadioButton eulerRotation;
         private System.Windows.Forms.RadioButton quaternionRotation;
         private System.Windows.Forms.PictureBox canvas;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button autoRotationButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar rotationSpeed;
+        private System.Windows.Forms.CheckBox autoRotationZ;
+        private System.Windows.Forms.CheckBox autoRotationX;
+        private System.Windows.Forms.CheckBox autoRotationY;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

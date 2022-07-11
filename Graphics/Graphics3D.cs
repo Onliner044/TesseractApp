@@ -116,7 +116,6 @@ namespace Graphics
         private void Control_Paint(object sender, PaintEventArgs e)
         {
             Paint?.Invoke(sender, new PaintEventArgs(Renderer.DirectBitmap.Graphics, e.ClipRectangle));
-
             Renderer.Prerender();
 
             Canvas.Image = Renderer.DirectBitmap.Bitmap;

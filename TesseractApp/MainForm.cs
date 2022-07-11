@@ -16,9 +16,13 @@ namespace TesseractApp
         private Point _mouseLocation;
         private bool _isControlKeyDown;
 
+        private System.Timers.Timer _timer;
+
         public MainForm()
         {
             InitializeComponent();
+
+            _timer = new System.Timers.Timer(10);
 
             _graphics3D = new Graphics3D(canvas);
             _graphics3D.Renderer.SetZBuffer(true);
@@ -32,9 +36,12 @@ namespace TesseractApp
 
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
+            _timer.Elapsed += Timer_Tick; 
 
             _tesseract = new Tesseract(1);
             _tesseract.Transform.Origin = -Vector3.One * _tesseract.EdgeLength / 2.0f;
+
+            ApplyColor();
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -115,6 +122,8 @@ namespace TesseractApp
                 return;
             }
 
+            _timer.Stop();
+
             if (_isControlKeyDown)
             {
                 rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
@@ -125,39 +134,18 @@ namespace TesseractApp
                 rotationX.Value = (360 + (e.Y - _lastMouseClickLocation.Y) % 360) % 360;
                 rotationY.Value = (360 + (e.X - _lastMouseClickLocation.X) % 360) % 360;
             }
+
+            ApplyRotation(rotationX.Value, rotationY.Value, rotationZ.Value);
         }
 
-        private void OutlineColor_Scroll(object sender, EventArgs e)
+        private void Color_Scroll(object sender, EventArgs e)
         {
-            _tesseract.OutlineColor = Color.FromArgb(alphaOutline.Value, redOutline.Value, greenOutline.Value, blueOutline.Value);
-        }
-
-        private void FillColor_Scroll(object sender, EventArgs e)
-        {
-            _tesseract.FillColor = Color.FromArgb(alphaFill.Value, redFill.Value, greenFill.Value, blueFill.Value);
-        }
-
-        private void VerticesColor_Scroll(object sender, EventArgs e)
-        {
-            _tesseract.VerticesColor = Color.FromArgb(alphaVertices.Value, redVertices.Value, greenVertices.Value, blueVertices.Value);
+            ApplyColor();
         }
 
         private void Rotation_ValueChanged(object sender, EventArgs e)
         {
-            float x = Converter.DegToRad(rotationX.Value);
-            float y = Converter.DegToRad(rotationY.Value);
-            float z = Converter.DegToRad(rotationZ.Value);
-
-            if (eulerRotation.Checked)
-            {
-                _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, x);
-                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, y);
-                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, z);
-            }
-            else
-            {
-                _tesseract.Transform.Rotation = Quaternion.CreateFromYawPitchRoll(y, x, z);
-            }
+            ApplyRotation(rotationX.Value, rotationY.Value, rotationZ.Value);
         }
 
         private void OutlinesCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -227,6 +215,82 @@ namespace TesseractApp
             fillCheckBox.Checked = true;
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            float degPerSec = 0;
+            float x = 0;
+            float y = 0;
+            float z = 0;
+
+            rotationSpeed.Invoke((MethodInvoker)delegate
+            {
+                degPerSec = rotationSpeed.Value;
+            });
+
+            rotationX.Invoke((MethodInvoker)delegate {
+                if (autoRotationX.Checked)
+                {
+                    x = (360 + (rotationX.Value + degPerSec) % 360) % 360;
+                    rotationX.Value = (int)x;
+                }
+                else
+                {
+                    x = rotationX.Value;
+                }
+            });
+
+            rotationY.Invoke((MethodInvoker)delegate {
+                if (autoRotationY.Checked)
+                {
+                    y = (360 + (rotationY.Value + degPerSec) % 360) % 360;
+                    rotationY.Value = (int)y;
+                }
+                else
+                {
+                    y = rotationY.Value;
+                }
+            });
+
+            rotationZ.Invoke((MethodInvoker)delegate {
+                if (autoRotationZ.Checked)
+                {
+                    z = (360 + (rotationZ.Value + degPerSec) % 360) % 360;
+                    rotationZ.Value = (int)z;
+                }
+                else
+                {
+                    z = rotationZ.Value;
+                }
+            });
+
+            ApplyRotation(x, y, z);
+        }
+
+        private void ApplyRotation(float xDeg, float yDeg, float zDeg)
+        {
+            float xRad = Converter.DegToRad(xDeg);
+            float yRad = Converter.DegToRad(yDeg);
+            float zRad = Converter.DegToRad(zDeg);
+
+            if (eulerRotation.Checked)
+            {
+                _tesseract.Transform.Rotation = Quaternion.CreateFromAxisAngle(Vector3.UnitX, xRad);
+                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitY, yRad);
+                _tesseract.Transform.Rotation *= Quaternion.CreateFromAxisAngle(Vector3.UnitZ, zRad);
+            }
+            else
+            {
+                _tesseract.Transform.Rotation = Quaternion.CreateFromYawPitchRoll(yRad, xRad, zRad);
+            }
+        }
+
+        private void ApplyColor()
+        {
+            _tesseract.OutlineColor = Color.FromArgb(alphaOutline.Value, redOutline.Value, greenOutline.Value, blueOutline.Value);
+            _tesseract.FillColor = Color.FromArgb(alphaFill.Value, redFill.Value, greenFill.Value, blueFill.Value);
+            _tesseract.VerticesColor = Color.FromArgb(alphaVertices.Value, redVertices.Value, greenVertices.Value, blueVertices.Value);
+        }
+
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             _graphics3D.Resize();
@@ -235,6 +299,16 @@ namespace TesseractApp
         private void SplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
         {
             _graphics3D.Resize();
+        }
+
+        private void AutoRotationButton_Click(object sender, EventArgs e)
+        {
+            _timer.Start();
+        }
+
+        private void Rotation_Scroll(object sender, EventArgs e)
+        {
+            ApplyRotation(rotationX.Value, rotationY.Value, rotationZ.Value);
         }
     }
 }
