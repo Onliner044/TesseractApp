@@ -34,8 +34,8 @@ namespace TesseractApp
             _graphics3D.Canvas.MouseDown += Graphics3D_Control_MouseDown;
             _graphics3D.Canvas.MouseMove += Graphics3D_Control_MouseMove;
 
-            KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
+            KeyDown += MainForm_KeyDown;
             _timer.Elapsed += Timer_Tick; 
 
             _tesseract = new Tesseract(1);
@@ -291,6 +291,21 @@ namespace TesseractApp
             _tesseract.VerticesColor = Color.FromArgb(alphaVertices.Value, redVertices.Value, greenVertices.Value, blueVertices.Value);
         }
 
+        private void Rotation_Scroll(object sender, EventArgs e)
+        {
+            ApplyRotation(rotationX.Value, rotationY.Value, rotationZ.Value);
+        }
+        
+        private void AutoRotationButton_Click(object sender, EventArgs e)
+        {
+            _timer.Start();
+        }
+
+        private void PauseAutoRotationButton_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+        }
+
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             _graphics3D.Resize();
@@ -299,16 +314,6 @@ namespace TesseractApp
         private void SplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
         {
             _graphics3D.Resize();
-        }
-
-        private void AutoRotationButton_Click(object sender, EventArgs e)
-        {
-            _timer.Start();
-        }
-
-        private void Rotation_Scroll(object sender, EventArgs e)
-        {
-            ApplyRotation(rotationX.Value, rotationY.Value, rotationZ.Value);
         }
     }
 }
